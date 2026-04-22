@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>קבב עסיסי</title>
+<style>
+:root {
+    --orange: #d35400;
+    --section-bg: #fffaf0;
+    --border: #f7d8c5;
+}
+body {
+    font-family: Alef, system-ui, sans-serif;
+    background: linear-gradient(180deg, #fdf8f0 0%, #fffefc 100%);
+    margin: 0;
+    padding: 40px 16px;
+    display: flex;
+    justify-content: center;
+}
+.page {
+    max-width: 900px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 28px 32px 32px;
+    position: relative;
+}
+.hero-wrapper {
+    position: relative;
+    width: 100%;
+    height: 260px; /* גובה קבוע (ברירת מחדל 260px) */
+    border-radius: 14px;
+    margin: 20px 0 24px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    overflow: hidden;           /* חותך את מה שגולש מה-scale */
+    background: #f5eee4;        /* fallback אם התמונה לא נטענה */
+}
+.hero {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;     /* מתיישב בדיוק — התמונה עובדה לאותו יחס */
+    background-repeat: no-repeat;
+    /* background-image, background-position, transform, transform-origin
+       מוזרקים inline מתוך Python לפי Position ו-Zoom */
+}
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.back-link {
+    font-size: 14px;
+    color: var(--orange);
+    text-decoration: none;
+    font-weight: 600;
+}
+.back-link:hover { text-decoration: underline; }
+.top-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.lang-switch {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: inherit;
+}
+.lang-switch img { width: 20px; height: 14px; }
+.print-button {
+    padding: 4px 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    background: var(--orange);
+    color: white;
+    cursor: pointer;
+}
+.print-button:hover { background: #e67e22; }
+.header-bar {
+    height: 3px;
+    background: var(--orange);
+    border-radius: 2px;
+    margin-bottom: 18px;
+}
+.tag {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    color: #7a7a7a;
+}
+h1 { margin: 6px 0; font-size: 32px; color: var(--orange); }
+.subtitle    { font-size: 15px; color: #666; margin-bottom: 6px; }
+.description { font-size: 15px; color: #444; }
+.meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    color: #23412f;
+}
+.meta-item .icon { font-size: 28px; }
+h2 { font-size: 20px; margin-bottom: 10px; color: var(--orange); }
+.section-box {
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+.divider {
+    height: 2px;
+    background: linear-gradient(to right, var(--orange) 10%, #fff 50%, var(--orange) 90%);
+    border: none;
+    margin: 20px 0;
+}
+
+ul {
+    list-style: none;
+    padding-right: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-right: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    right: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-right: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-right: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-right: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top-bar">
+    <a class="back-link" href="../../index_he.html">→ חזרה לאינדקס</a>
+    <div class="top-right">
+      <a class="lang-switch" href="Kabab_en.html"><img src="../../flag_gb.png" alt="English"> English</a>
+      <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+    </div>
+  </div>
+
+  <div class="hero-wrapper"><div class="hero" role="img" aria-label="קבב עסיסי" style="background-image: url('Kabab.jpg'); background-position: center center; transform: scale(1.0); transform-origin: center center;"></div></div>
+  <div class="header-bar"></div>
+
+  <div class="header">
+    <div class="tag">מתכון</div>
+    <h1>קבב עסיסי</h1>
+    <div class="subtitle">מנה קלאסית שקל להכין בבית.</div>
+    <div class="description">הקבב הטורקי הוא מאכל רחוב אהוב בכל רחבי המזרח התיכון וישראל. המפתח לקבב מוצלח הוא שימוש בבשר טרי ואיכותי וערבוב לא מוגזם. הוספת כבש טחון נותנת טעם עשיר ומסורתי יותר. הכי טוב להגיש ישר מהגריל.</div>
+    <div class="meta">
+      <div class="meta-item"><span class="icon">🕒</span> <b>זמן:</b> 35 דקות</div>
+      <div class="meta-item"><span class="icon">🍽️</span> <b>מנות:</b> 4</div>
+      <div class="meta-item"><span class="icon">🧑‍🍳</span> <b>רמת קושי:</b> קל</div>
+    </div>
+  </div>
+
+  <div class="section-box">
+    <h2>מצרכים</h2>
+    <ul><li>600  גרם בשר בקר טחון טרי (או תערובת בקר וכבש) – עדיף מנתח אסאדו</li><li>בצל גדול אחד, קלוף ומגוררת או קצוץ דק</li><li>צרור פטרוזיליה/כוסברה, קצוצה דק</li><li>1 ½  כפית מלח</li><li>½  כפית סודה לשתייה</li><li>1  כפית פלפל שחור גרוס</li><li>½  כפית כמון</li><li>½  כפית קינמון</li><li>אופציונלי: ¼ כפית בהרט</li><li>אופציונלי: חופן צנוברים או פיסטוקים קצוצים דק</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>הוראות הכנה</h2>
+    <ol><li>שים את כל המצרכים בקערה וערבב היטב עד לתערובת אחידה. קרר את התערובת במקרר לפחות 30 דקות כדי שהטעמים יתפתחו.</li><li>הרטב את הידיים במים או שמן. קח חלק מתערובת הבשר (בגודל כדור גולף) וצור על שיפוד שטוח, או עצב ביד לצורה אובלית.</li><li>צלה על גריל חם או מחבת בחום בינוני-גבוה כ-4-5 דקות מכל צד, עד שהקבב משחים יפה ומבושל לגמרי.</li><li>הגש עם פיתה, טחינה, סלט ישראלי וחמוצים. ניתן גם להגיש על מצע אורז.</li></ol>
+  </div>
+</div>
+</body>
+</html>

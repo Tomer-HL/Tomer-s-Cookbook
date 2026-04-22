@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Baked Cheesecake – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-left: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    left: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-left: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-left: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+</style>
+</head>
+<body>
+  <h1>Baked Cheesecake</h1>
+  <p>Unlike the dense and heavy American classic, this Israeli cheesecake is a celebration of cloud-like lightness and airy texture. It offers a delicate, melt-in-your-mouth experience that captures the perfect balance between rich flavor and an effortless, weightless finish.</p>
+  <button class="print-button" onclick="window.print()">🖨️ Print</button>
+  <div class="section-box">
+    <h2>Ingredients</h2>
+    <ul><li class="ing-heading">For the Cheesecake Base</li><li>750g (26 oz) Israeli white cheese (5% fat) or plain yogurt cheese (strained of excess liquid).</li><li>6 Large eggs, separated.</li><li>1 cup Granulated sugar.</li><li>5 tbsp Cornstarch (leveled).</li><li>3 tbsp Instant vanilla pudding mix.</li><li>1 tsp Pure vanilla extract.</li><li class="ing-heading">For the Vanilla Whipped Topping</li><li>250ml (1 cup) Heavy whipping cream (38% fat), chilled.</li><li>240ml (1 cup) Whole milk, cold.</li><li>80g (1 pack) Instant vanilla pudding mix.</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>Instructions</h2>
+    <ol><li><strong class="step-heading">Prepare the Cheese Base</strong><br>In a large mixing bowl, whisk together the white cheese, egg yolks, vanilla extract, cornstarch, and the 3 tablespoons of instant vanilla pudding. Whisk until the mixture is completely smooth and free of lumps.</li><li><strong class="step-heading">Whip the Egg Whites</strong><br>In a clean stand mixer bowl, whip the egg whites on medium-high speed. Once a white foam begins to form, gradually add the sugar. Continue whipping until you achieve stiff but flexible peaks (avoid over-whipping until dry).</li><li><strong class="step-heading">Fold the Batter</strong><br>Gently fold about one-third of the egg white foam into the cheese mixture to lighten it. Once combined, add the remaining whites and fold very gently using a spatula until the batter is uniform. This preserves the air needed for the cake to rise.</li><li><strong class="step-heading">The High-Heat Stage</strong><br>Preheat your oven to 450°F (230°C). Place a tray filled with boiling water on the bottom rack to create a moist environment. Pour the batter into a greased springform pan and bake for 10–15 minutes until the top is lightly golden.</li><li><strong class="step-heading">The Release</strong><br>Remove the cake from the oven for 5 minutes. Run a thin knife around the inside edge of the pan (about 1 inch deep). This prevents the cake from sticking to the sides as it continues to rise and cool, which stops the top from cracking.</li><li><strong class="step-heading">The Low-Heat Stage</strong><br>Lower the oven temperature to 300°F (150°C). Return the cake to the oven and bake for another 60 minutes. The cake is ready when the edges are set but the center still jiggles slightly. Turn off the oven and let the cake cool inside with the door slightly ajar for at least one hour.</li><li><strong class="step-heading">Topping & Serving</strong><br>Once the cake has cooled completely, prepare the topping. Whip the heavy cream, milk, and vanilla pudding mix until stiff peaks form. Spread the cream evenly over the top. Decorate with dark chocolate shavings or fresh berries if desired.</li></ol>
+  </div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>שקשוקה ישראלית – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-right: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-right: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    right: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-right: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-right: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <h1>שקשוקה ישראלית</h1>
+  <p>שקשוקה היא אחת המנות האהובות והאיקוניות של המטבח הישראלי. היא הגיעה לישראל עם עולים יהודים מצפון אפריקה, ובבסיסה רוטב עגבניות מתובל שבתוכו מתבשלות ביצים. ברחבי המזרח התיכון וצפון אפריקה קיימות גרסאות אזוריות רבות למנה זו.</p>
+  <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+  <div class="section-box">
+    <h2>מצרכים</h2>
+    <ul><li>2 כפות שמן זית</li><li>1 בצל, קלוף וקצוץ דק</li><li>1 פלפל אדום, נקי מגרעינים וקצוץ דק</li><li>1–2 שיני שום, כתושות</li><li>1 פלפל חריף קצוץ או 1 כפית צ’יפוטלה / פתיתי צ’ילי חריף</li><li>1 כף פפריקה</li><li>4 כוסות עגבניות טריות ובשלות, חתוכות לקוביות</li><li>2 כפות רסק עגבניות</li><li>מלח ופלפל שחור גרוס טרי, לפי הטעם</li><li>6 ביצים, בטמפרטורת החדר</li><li>½ כף פטרוזיליה טרייה קצוצה (לקישוט, לא חובה)</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>הוראות הכנה</h2>
+    <ol><li>מחממים מחבת רחבה על אש בינונית ומוסיפים את שמן הזית. מוסיפים את הבצל ומטגנים כ־3–4 דקות, עד שהוא מתחיל להתרכך. מוסיפים את השום ומטגנים כ־30 שניות נוספות, עד שעולה ריח נעים.</li><li>מוסיפים את הפלפל האדום והפלפל החריף ומטגנים 5–7 דקות, עד לריכוך. מוסיפים את הפפריקה ומערבבים.</li><li>מוסיפים את העגבניות ורסק העגבניות ומערבבים היטב. מתבלים במלח ובפלפל. מבשלים על אש בינונית במשך 7–10 דקות, עד שהרוטב מסמיך והעגבניות מתרככות ומתפרקות.</li><li>טועמים ומתקנים תיבול לפי הצורך. אם הרוטב מסמיך מדי, מוסיפים מעט מים כדי למנוע חריכה.</li><li>שוברים כל ביצה לכלי קטן. יוצרים גומות קטנות ברוטב ומחליקים בעדינות את הביצים לתוך המחבת. מתבלים קלות את הביצים במלח.</li><li>מכסים את המחבת ומבשלים 5–7 דקות, עד שחלבון הביצה מתייצב והחלמון מגיע לדרגת העשייה הרצויה.</li><li>למי שמעדיף חלמון רך, מומלץ לעקוב מקרוב ולהימנע מבישול יתר.</li><li>מקשטים בפטרוזיליה קצוצה, אם רוצים, ומגישים מיד.</li></ol>
+  </div>
+</body>
+</html>

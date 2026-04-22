@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ספר המתכונים הישראלי של תומר</title>
+<link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --orange: #d35400;
+    --orange-light: #f39c12;
+    --bg: #fdf8f0;
+    --card-bg: #ffffff;
+    --border: #f0e0d0;
+    --text: #2c1a0e;
+    --muted: #7a6a5a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: Alef, system-ui, sans-serif;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(211,84,0,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(243,156,18,0.07) 0%, transparent 60%);
+    min-height: 100vh;
+    color: var(--text);
+}
+
+/* ---- Header ---- */
+.site-header {
+    background: linear-gradient(135deg, #2c1a0e 0%, #5a3010 100%);
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.02) 0px,
+        rgba(255,255,255,0.02) 1px,
+        transparent 1px,
+        transparent 12px
+    );
+}
+.lang-switch {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    background: rgba(255,255,255,0.1);
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: background 0.2s;
+}
+.lang-switch:hover { background: rgba(255,255,255,0.2); color: #fff; }
+.lang-switch img { width: 20px; height: 14px; border-radius: 2px; }
+
+.site-title {
+    font-family: Alef, system-ui, sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    color: #fff;
+    letter-spacing: 0.02em;
+    position: relative;
+    line-height: 1.15;
+}
+.title-accent {
+    color: var(--orange-light);
+}
+.site-subtitle {
+    margin-top: 10px;
+    font-size: clamp(13px, 2vw, 16px);
+    color: rgba(255,255,255,0.6);
+    position: relative;
+    font-style: italic;
+}
+.header-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--orange-light);
+    margin: 18px auto 0;
+    border-radius: 2px;
+    position: relative;
+}
+
+/* ---- Main ---- */
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+}
+
+/* ---- Category sections ---- */
+.category {
+    margin-bottom: 52px;
+}
+.cat-title {
+    font-family: Alef, system-ui, sans-serif;
+    font-size: 22px;
+    color: var(--orange);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+}
+.cat-icon { font-size: 26px; }
+
+/* ---- Cards grid ---- */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 20px;
+}
+.card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+    border: 1px solid var(--border);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    display: flex;
+    flex-direction: column;
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(211,84,0,0.15);
+}
+.card-img {
+    height: 155px;
+    overflow: hidden;
+    background: #f5ebe0;
+}
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+.card:hover .card-img img {
+    transform: scale(1.05);
+}
+.no-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 13px;
+    background: linear-gradient(135deg, #f5ebe0, #fdf3e8);
+}
+.card-body {
+    padding: 14px 16px 16px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+}
+
+/* ---- Footer ---- */
+footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+}
+
+@media (max-width: 480px) {
+    .cards { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .card-img { height: 120px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="lang-switch" href="index_en.html"><img src="flag_gb.png" alt="EN"> English</a>
+  <h1 class="site-title">
+    <span class="title-accent">ספר המתכונים</span><br>הישראלי של תומר
+  </h1>
+  <p class="site-subtitle">מתכונים ישראליים מסורתיים מהמטבח שלי למטבח שלכם</p>
+  <div class="header-divider"></div>
+</header>
+
+<main>
+  
+        <section class="category">
+          <h2 class="cat-title"><span class="cat-icon">🍳</span> עיקריות</h2>
+          <div class="cards">
+            <a class="card" href="entrees/Arayes/Arayes_he.html">
+              <div class="card-img"><img src="entrees/Arayes/Arayes.png" alt="עראייס" loading="lazy"></div>
+              <div class="card-body">
+                <span class="card-title">עראייס</span>
+              </div>
+            </a>
+            <a class="card" href="entrees/Kabab/Kabab_he.html">
+              <div class="card-img"><img src="entrees/Kabab/Kabab.jpg" alt="קבב עסיסי" loading="lazy"></div>
+              <div class="card-body">
+                <span class="card-title">קבב עסיסי</span>
+              </div>
+            </a>
+            <a class="card" href="entrees/Schnitzel/Schnitzel_he.html">
+              <div class="card-img"><img src="entrees/Schnitzel/Schnitzel.png" alt="שניצל ישראלי קריספי" loading="lazy"></div>
+              <div class="card-body">
+                <span class="card-title">שניצל ישראלי קריספי</span>
+              </div>
+            </a>
+            <a class="card" href="entrees/Shakshuka/Shakshuka_he.html">
+              <div class="card-img"><img src="entrees/Shakshuka/Shakshuka.png" alt="שקשוקה ישראלית" loading="lazy"></div>
+              <div class="card-body">
+                <span class="card-title">שקשוקה ישראלית</span>
+              </div>
+            </a>
+            <a class="card" href="entrees/Yemenite_Chicken_Soup/Yemenite_Chicken_Soup_he.html">
+              <div class="card-img"><img src="entrees/Yemenite_Chicken_Soup/Yemenite_Chicken_Soup.png" alt="מרק עוף תימני" loading="lazy"></div>
+              <div class="card-body">
+                <span class="card-title">מרק עוף תימני</span>
+              </div>
+            </a>
+          </div>
+        </section>
+        <section class="category">
+          <h2 class="cat-title"><span class="cat-icon">🥗</span> תוספות</h2>
+          <div class="cards">
+            <a class="card" href="sides/Matbucha/Matbucha_he.html">
+              <div class="card-img"><img src="sides/Matbucha/Matbucha.png" alt="מטבוחה מרוקאית" loading="lazy"></div>
+              <div class="card-body">
+                <span class="card-title">מטבוחה מרוקאית</span>
+              </div>
+            </a>
+          </div>
+        </section>
+        <section class="category">
+          <h2 class="cat-title"><span class="cat-icon">🍞</span> לחמים ומאפים</h2>
+          <div class="cards">
+            <a class="card" href="bread/Challah/Challah_he.html">
+              <div class="card-img"><img src="bread/Challah/Challah.png" alt="חלה" loading="lazy"></div>
+              <div class="card-body">
+                <span class="card-title">חלה</span>
+              </div>
+            </a>
+          </div>
+        </section>
+        <section class="category">
+          <h2 class="cat-title"><span class="cat-icon">🍮</span> קינוחים</h2>
+          <div class="cards">
+            <a class="card" href="desserts/Baked_Cheesecake/Baked_Cheesecake_he.html">
+              <div class="card-img"><img src="desserts/Baked_Cheesecake/Baked_Cheesecake.png" alt="עוגת גבינה אפויה" loading="lazy"></div>
+              <div class="card-body">
+                <span class="card-title">עוגת גבינה אפויה</span>
+              </div>
+            </a>
+          </div>
+        </section>
+</main>
+
+<footer>
+  © 2020 Tomer Hillel · All rights reserved
+</footer>
+
+</body>
+</html>

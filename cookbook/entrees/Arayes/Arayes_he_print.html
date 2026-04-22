@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>עראייס – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-right: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-right: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    right: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-right: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-right: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <h1>עראייס</h1>
+  <p>עראייס הוא מאכל קלאסי שקל מאוד להכין בבית. מקורו בלבנון וסוריה, והוא הובא לישראל על ידי קהילות יהודיות מרחבי העולם הערבי. כיום הוא נחשב לאחד ממאכלי הרחוב האייקוניים ביותר בישראל – קריספי מבחוץ, עסיסי מבפנים, ומושלם כשהוא יוצא מהגריל לצד טחינה.</p>
+  <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+  <div class="section-box">
+    <h2>מצרכים</h2>
+    <ul><li>פיתות: 6 פיתות, חתוכות לחצאים או רבעים.</li><li>לתערובת הבשר:</li><li>500 גרם בשר בקר טחון טרי (או תערובת של בקר עם 100 גרם שומן טלה / רבע כמות בשר טלה).</li><li>1/2 צרור פטרוזיליה, קצוצה דק.</li><li>1 בצל גדול, קלוף וקצוץ דק.</li><li>1.5 כפית מלח.</li><li>1/2 כפית סודה לשתייה.</li><li>1/2 כפית קינמון.</li><li>1/2 כף תבלין לגריל/ברביקיו.</li><li>2 כפות מייפל טהור או סילאן (דבש תמרים).</li><li>1 כפית פלפל שחור טחון.</li><li>רשות: חופן אגוזים קצוצים דק (פיסטוקים או צנוברים).</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>הוראות הכנה</h2>
+    <ol><li>קיצוץ: קצצו את הבצל והפטרוזיליה דק ככל האפשר.</li><li>ערבוב: בקערה גדולה, ערבבו את הבצל והפטרוזיליה הקצוצים עם הבשר הטחון וכל שאר המרכיבים. ערבבו היטב עד לקבלת תערובת אחידה.</li><li>טיפ: לקבלת טעם עשיר ואותנטי יותר, מומלץ מאוד להוסיף שומן טלה.</li><li>הרכבה: חתכו את הפיתות לרבעים ומלאו כל רבע בתערובת הבשר. דחסו את המילוי בחוזקה פנימה ונקו שאריות בשר מהקצוות של הפיתה.</li><li>צלייה: הניחו את רבעי העראייס על גריל בחום בינוני כאשר הצד הפתוח פונה כלפי מטה (צד הבשר תחילה) עד שהבשר משחים ונסגר. לאחר מכן, הפכו וצלו את שאר הצדדים עד שהפיתה מזהיבה ונהיית קריספית.</li><li>טיפ למקצוענים: כדי לשמור על עסיסיות הבשר, ניתן להתיז מעט מים על הצד הצלוי בכל פעם שהופכים את העראייס.</li></ol>
+  </div>
+</body>
+</html>

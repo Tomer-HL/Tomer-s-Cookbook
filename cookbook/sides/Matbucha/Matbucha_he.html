@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מטבוחה מרוקאית</title>
+<style>
+:root {
+    --orange: #d35400;
+    --section-bg: #fffaf0;
+    --border: #f7d8c5;
+}
+body {
+    font-family: Alef, system-ui, sans-serif;
+    background: linear-gradient(180deg, #fdf8f0 0%, #fffefc 100%);
+    margin: 0;
+    padding: 40px 16px;
+    display: flex;
+    justify-content: center;
+}
+.page {
+    max-width: 900px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 28px 32px 32px;
+    position: relative;
+}
+.hero-wrapper {
+    position: relative;
+    width: 100%;
+    height: 260px; /* גובה קבוע (ברירת מחדל 260px) */
+    border-radius: 14px;
+    margin: 20px 0 24px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    overflow: hidden;           /* חותך את מה שגולש מה-scale */
+    background: #f5eee4;        /* fallback אם התמונה לא נטענה */
+}
+.hero {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;     /* מתיישב בדיוק — התמונה עובדה לאותו יחס */
+    background-repeat: no-repeat;
+    /* background-image, background-position, transform, transform-origin
+       מוזרקים inline מתוך Python לפי Position ו-Zoom */
+}
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.back-link {
+    font-size: 14px;
+    color: var(--orange);
+    text-decoration: none;
+    font-weight: 600;
+}
+.back-link:hover { text-decoration: underline; }
+.top-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.lang-switch {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: inherit;
+}
+.lang-switch img { width: 20px; height: 14px; }
+.print-button {
+    padding: 4px 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    background: var(--orange);
+    color: white;
+    cursor: pointer;
+}
+.print-button:hover { background: #e67e22; }
+.header-bar {
+    height: 3px;
+    background: var(--orange);
+    border-radius: 2px;
+    margin-bottom: 18px;
+}
+.tag {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    color: #7a7a7a;
+}
+h1 { margin: 6px 0; font-size: 32px; color: var(--orange); }
+.subtitle    { font-size: 15px; color: #666; margin-bottom: 6px; }
+.description { font-size: 15px; color: #444; }
+.meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    color: #23412f;
+}
+.meta-item .icon { font-size: 28px; }
+h2 { font-size: 20px; margin-bottom: 10px; color: var(--orange); }
+.section-box {
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+.divider {
+    height: 2px;
+    background: linear-gradient(to right, var(--orange) 10%, #fff 50%, var(--orange) 90%);
+    border: none;
+    margin: 20px 0;
+}
+
+ul {
+    list-style: none;
+    padding-right: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-right: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    right: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-right: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-right: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-right: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top-bar">
+    <a class="back-link" href="../../index_he.html">→ חזרה לאינדקס</a>
+    <div class="top-right">
+      <a class="lang-switch" href="Matbucha_en.html"><img src="../../flag_gb.png" alt="English"> English</a>
+      <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+    </div>
+  </div>
+
+  <div class="hero-wrapper"><div class="hero" role="img" aria-label="מטבוחה מרוקאית" style="background-image: url('Matbucha.png'); background-position: center center; transform: scale(1.0); transform-origin: center center;"></div></div>
+  <div class="header-bar"></div>
+
+  <div class="header">
+    <div class="tag">מתכון</div>
+    <h1>מטבוחה מרוקאית</h1>
+    <div class="subtitle">מנה קלאסית שקל להכין בבית.</div>
+    <div class="description">המטבוחה היא ממרח עגבניות ופלפלים מרוקאי קלאסי שמתבשל לאט עד לקבלת עומק טעמים עשיר ומרוכז. זמן הבישול והסבלנות הם הסוד למרקם ולטעם המושלמים. נהדרת כמטבל עם לחם טרי, לצד חומוס וסלטים, או כתוספת לכל ארוחה.</div>
+    <div class="meta">
+      <div class="meta-item"><span class="icon">🕒</span> <b>זמן:</b> 1 1/2 שעות</div>
+      <div class="meta-item"><span class="icon">🍽️</span> <b>מנות:</b> 6</div>
+      <div class="meta-item"><span class="icon">🧑‍🍳</span> <b>רמת קושי:</b> בינוני</div>
+    </div>
+  </div>
+
+  <div class="section-box">
+    <h2>מצרכים</h2>
+    <ul><li>6 עגבניות בינוניות-גדולות, בשלות או 800 גרם רסק עגבניות איכותי (מומלץ MUTTI )</li><li>2  פלפלים אדומים, צלויים, קלופים וקצוצים</li><li>6–8 שיני שום, פרוסות דק</li><li>5–6 כפות שמן זית</li><li>1 כפית פפריקה חריפה</li><li>1 כפית פפריקה מתוקה</li><li>½ כפית כמון</li><li>½–1 כפית פלפל חריף גרוס או פלפל חריף טרי קצוץ (לפי הטעם)</li><li>1 כפית מלח</li><li>½ כפית סוכר (ולהוסיף לפי הטעם בסוף אם צריך)</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>הוראות הכנה</h2>
+    <ol><li><strong class="step-heading">צליית הפלפלים</strong><br>הנח את הפלפלים ישירות על להבת גז או מתחת לגריל בתנור. הפוך מדי פעם עד שהקליפה שרופה היטב מכל הצדדים. העבר לשקית סגורה ל-10 דקות, לאחר מכן קלף, הסר גרעינים וקצוץ.</li><li><strong class="step-heading">תחילת הבישול</strong><br>חמם שמן זית במחבת רחבה וכבדה על חום בינוני-נמוך. הוסף את השום וטגן בעדינות 30–60 שניות בלבד, עד שעולה ריח (להיזהר לא לשרוף).</li><li><strong class="step-heading">הוספת המרכיבים</strong><br>הוסף את העגבניות הקצוצות או רסק העגבניות, יחד עם הפלפלים, הפפריקה החריפה, הפפריקה המתוקה, הכמון, הפלפל החריף, המלח והסוכר. ערבב היטב.</li><li><strong class="step-heading">בישול איטי</strong><br>בשל ללא מכסה על חום בינוני-נמוך במשך 45–60 דקות. ערבב כל   5–10דקות כדי למנוע הידבקות.</li><li><strong class="step-heading">המטבוחה מוכנה כאשר</strong><br>•	רוב הנוזלים התאדו<br>•	המרקם סמיך וריבתי<br>•	מתחילים לראות הפרדה קלה של שמן מהתערובת.</li><li><strong class="step-heading">טעימה וסיום</strong><br>טעם ותקן תיבול (אפשר להוסיף עוד מלח / חריף / מעט סוכר לפי הצורך).<br>אופציונלי: הוסף שן שום כתושה טרייה בסוף הבישול וערבב.<br>קירור והגשה: הנח למטבוחה להתקרר והגש בטמפרטורת חדר או קר.<br>אחסון: שמור בכלי אטום במקרר עד 5 ימים.</li></ol>
+  </div>
+</div>
+</body>
+</html>

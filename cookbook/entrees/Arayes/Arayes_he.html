@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>עראייס</title>
+<style>
+:root {
+    --orange: #d35400;
+    --section-bg: #fffaf0;
+    --border: #f7d8c5;
+}
+body {
+    font-family: Alef, system-ui, sans-serif;
+    background: linear-gradient(180deg, #fdf8f0 0%, #fffefc 100%);
+    margin: 0;
+    padding: 40px 16px;
+    display: flex;
+    justify-content: center;
+}
+.page {
+    max-width: 900px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 28px 32px 32px;
+    position: relative;
+}
+.hero {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 14px;
+    margin: 20px 0 24px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.back-link {
+    font-size: 14px;
+    color: var(--orange);
+    text-decoration: none;
+    font-weight: 600;
+}
+.back-link:hover { text-decoration: underline; }
+.top-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.lang-switch {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: inherit;
+}
+.lang-switch img { width: 20px; height: 14px; }
+.print-button {
+    padding: 4px 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    background: var(--orange);
+    color: white;
+    cursor: pointer;
+}
+.print-button:hover { background: #e67e22; }
+.header-bar {
+    height: 3px;
+    background: var(--orange);
+    border-radius: 2px;
+    margin-bottom: 18px;
+}
+.tag {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    color: #7a7a7a;
+}
+h1 { margin: 6px 0; font-size: 32px; color: var(--orange); }
+.subtitle    { font-size: 15px; color: #666; margin-bottom: 6px; }
+.description { font-size: 15px; color: #444; }
+.meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    color: #23412f;
+}
+.meta-item .icon { font-size: 28px; }
+h2 { font-size: 20px; margin-bottom: 10px; color: var(--orange); }
+.section-box {
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+.divider {
+    height: 2px;
+    background: linear-gradient(to right, var(--orange) 10%, #fff 50%, var(--orange) 90%);
+    border: none;
+    margin: 20px 0;
+}
+
+ul {
+    list-style: none;
+    padding-right: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-right: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    right: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-right: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-right: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top-bar">
+    <a class="back-link" href="../../index_he.html">→ חזרה לאינדקס</a>
+    <div class="top-right">
+      <a class="lang-switch" href="Arayes_en.html"><img src="../../flag_gb.png" alt="English"> English</a>
+      <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+    </div>
+  </div>
+
+  <img class="hero" src="Arayes.png" alt="עראייס">
+  <div class="header-bar"></div>
+
+  <div class="header">
+    <div class="tag">מתכון</div>
+    <h1>עראייס</h1>
+    <div class="subtitle">מנה קלאסית שקל להכין בבית.</div>
+    <div class="description">עראייס הוא מאכל קלאסי שקל מאוד להכין בבית. מקורו בלבנון וסוריה, והוא הובא לישראל על ידי קהילות יהודיות מרחבי העולם הערבי. כיום הוא נחשב לאחד ממאכלי הרחוב האייקוניים ביותר בישראל – קריספי מבחוץ, עסיסי מבפנים, ומושלם כשהוא יוצא מהגריל לצד טחינה.</div>
+    <div class="meta">
+      <div class="meta-item"><span class="icon">🕒</span> <b>זמן:</b> 50 דקות</div>
+      <div class="meta-item"><span class="icon">🍽️</span> <b>מנות:</b> 4</div>
+      <div class="meta-item"><span class="icon">🧑‍🍳</span> <b>רמת קושי:</b> בינוני</div>
+    </div>
+  </div>
+
+  <div class="section-box">
+    <h2>מצרכים</h2>
+    <ul><li>פיתות: 6 פיתות, חתוכות לחצאים או רבעים.</li><li>לתערובת הבשר:</li><li>500 גרם בשר בקר טחון טרי (או תערובת של בקר עם 100 גרם שומן טלה / רבע כמות בשר טלה).</li><li>1/2 צרור פטרוזיליה, קצוצה דק.</li><li>1 בצל גדול, קלוף וקצוץ דק.</li><li>1.5 כפית מלח.</li><li>1/2 כפית סודה לשתייה.</li><li>1/2 כפית קינמון.</li><li>1/2 כף תבלין לגריל/ברביקיו.</li><li>2 כפות מייפל טהור או סילאן (דבש תמרים).</li><li>1 כפית פלפל שחור טחון.</li><li>רשות: חופן אגוזים קצוצים דק (פיסטוקים או צנוברים).</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>הוראות הכנה</h2>
+    <ol><li>קיצוץ: קצצו את הבצל והפטרוזיליה דק ככל האפשר.</li><li>ערבוב: בקערה גדולה, ערבבו את הבצל והפטרוזיליה הקצוצים עם הבשר הטחון וכל שאר המרכיבים. ערבבו היטב עד לקבלת תערובת אחידה.</li><li>טיפ: לקבלת טעם עשיר ואותנטי יותר, מומלץ מאוד להוסיף שומן טלה.</li><li>הרכבה: חתכו את הפיתות לרבעים ומלאו כל רבע בתערובת הבשר. דחסו את המילוי בחוזקה פנימה ונקו שאריות בשר מהקצוות של הפיתה.</li><li>צלייה: הניחו את רבעי העראייס על גריל בחום בינוני כאשר הצד הפתוח פונה כלפי מטה (צד הבשר תחילה) עד שהבשר משחים ונסגר. לאחר מכן, הפכו וצלו את שאר הצדדים עד שהפיתה מזהיבה ונהיית קריספית.</li><li>טיפ למקצוענים: כדי לשמור על עסיסיות הבשר, ניתן להתיז מעט מים על הצד הצלוי בכל פעם שהופכים את העראייס.</li></ol>
+  </div>
+</div>
+</body>
+</html>

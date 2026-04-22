@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Israeli Shakshuka – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-left: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    left: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-left: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-left: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <h1>Israeli Shakshuka</h1>
+  <p>Shakshuka is one of Israel’s most beloved dishes. Brought to Israel by Jewish immigrants from North Africa, it traditionally consists of spiced stewed tomatoes topped with gently poached eggs. Across the Middle East and North Africa, many regional variations of shakshuka exist.</p>
+  <button class="print-button" onclick="window.print()">🖨️ Print</button>
+  <div class="section-box">
+    <h2>Ingredients</h2>
+    <ul><li>2 tbsp olive oil</li><li>1 onion, peeled and finely diced</li><li>1 red bell pepper, seeded and finely chopped</li><li>1–2 cloves garlic, minced</li><li>1 chopped hot pepper or 1 tsp chipotle / hot chili flakes</li><li>1 tbsp paprika</li><li>4 cups ripe fresh tomatoes, diced</li><li>2 tbsp tomato paste</li><li>Salt and freshly ground black pepper, to taste</li><li>6 eggs, at room temperature</li><li>½ tbsp fresh chopped parsley (for garnish, optional)</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>Instructions</h2>
+    <ol><li>Heat a sauté pan over medium heat and add the olive oil. Add the diced onion and sauté for 3–4 minutes until it begins to soften. Add the garlic and cook for about 30 seconds, until fragrant.</li><li>Add the chopped bell pepper and hot pepper. Sauté for 5–7 minutes, until softened. Stir in the paprika.</li><li>Add the diced tomatoes and tomato paste, stirring until well combined. Season with salt and black pepper. Let the mixture simmer over medium heat for 7–10 minutes, until the sauce thickens and the tomatoes break down.</li><li>Taste the sauce and adjust seasoning if needed. If the sauce becomes too thick, add a small splash of water to prevent burning.</li><li>Crack each egg into a small bowl. Make small wells in the sauce and gently slide the eggs into the pan. Lightly season the eggs with salt.</li><li>Cover the pan and simmer for 5–7 minutes, until the egg whites are set and the yolks are cooked to your liking.</li><li>For runnier yolks, check frequently to avoid overcooking.</li><li>Garnish with chopped parsley, if desired, and serve immediately.</li></ol>
+  </div>
+</body>
+</html>

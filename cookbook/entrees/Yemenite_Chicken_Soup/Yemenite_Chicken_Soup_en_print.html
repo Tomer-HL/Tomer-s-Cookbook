@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Yemenite Chicken Soup – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-left: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    left: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-left: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-left: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <h1>Yemenite Chicken Soup</h1>
+  <p>Yemenite chicken soup is traditiona ly served as
+the entree of the Shabbat meal on Friday
+evening and in social events.
+The broth of this soup is spiced with hawaij, a
+Yemenite spice blend that can be purchased at
+most Jewish markets and very healthy due to
+the high amount of tumeric in it.
+Recommended: serve with chalah or traditional
+Yemenite-pita or Lachuch in the soup.</p>
+  <button class="print-button" onclick="window.print()">🖨️ Print</button>
+  <div class="section-box">
+    <h2>Ingredients</h2>
+    <ul><li>6 chicken drumsticks or 3-4 chicken legs</li><li>1 tbsp hawaij spice</li><li>2 onions, peeled and cut into halves or quarters</li><li>5-6 cloves of garlic</li><li>2–3 carrots, peeled and cut into 2-inch pieces</li><li>2 medium potatoes, peeled and cut into quarters</li><li>1–3 celery stalks, cut into 2-inch pieces</li><li>1 bunch cilantro, cleaned, rinsed, and finely chopped</li><li>1/2 tbsp salt (add more later if needed)</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>Instructions</h2>
+    <ol><li>Place chicken pieces in an 8-quart stock pot. Add about 12–14 cups of water (about 2/3 full). Bring to a boil and simmer for a few minutes, skimming off the foam that rises to the top.</li><li>Add and stir in: hawaij, salt, onions and garlic.</li><li>Bring to a boil, then reduce to medium heat and cook for about 15 minutes. Keep it at a gentle simmer (bubbling lightly, not rapidly boiling).</li><li>Add the potatoes, carrots, celery, cilantro. Bring back to a low simmer and cook for another 30 minutes, or until the vegetables are tender.</li></ol>
+  </div>
+</body>
+</html>

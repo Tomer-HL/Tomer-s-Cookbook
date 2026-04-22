@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>שניצל ישראלי קריספי – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-right: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-right: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    right: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-right: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-right: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <h1>שניצל ישראלי קריספי</h1>
+  <p>שניצל ישראלי קלאסי מוגש לעיתים קרובות בלחמניה, חלה או פיתה עם:
+סלט ישראלי
+סלט כרוב (קולסלאו)
+חמוצים
+טחינה/מיונז
+מטבוחה
+חציל מטוגן
+תוספת חריפה כמו סחוג תימני או חריסה</p>
+  <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+  <div class="section-box">
+    <h2>מצרכים</h2>
+    <ul><li>6–8 חצאי חזה עוף ללא עור ועצמות, פרוסים לעובי של כ־½ ס״מ או 1 ק"ג חזה עוף פרוס דק</li><li>חבילת ביסלי בטעם ברביקיו קטנה (כ‑70 גרם) – אופציונלי</li><li>2–3 כוסות פירורי פנקו</li><li>1 כף שומשום</li><li>1 כפית תבלין גריל / על-האש</li><li>1 כוס קמח או קורנפלור</li><li>1/2 כפית מלח</li><li>4 ביצים</li><li>1 כפית חרדל</li><li>שמן צימחי לטיגון</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>הוראות הכנה</h2>
+    <ol><li>הכנת העוף
+פרוס את חזה העוף לחתיכות שניצל דקות והנח על מגש רחב.
+פזר מעט מלח ותן לעמוד 10 דקות.
+לאחר מכן, ייבש את החתיכות עם נייר סופג.</li><li>הכנת תחנות הציפוי
+צלחת 1: קמח
+צלחת שנייה: ביצים טרופות עם מלח, תיבול גריל/על-האש וחרדל
+קערה או מגש: פנקו, שומשום וביסלי גריל כתוש דק
+טיפ: השתמש ביד אחת עבור החומרים היבשים (קמח ותערובת פירורים) וביד השנייה עבור החומרים הרטובים (ביצה). זה שומר על הידיים נקיות יותר.</li><li>ציפוי השניצלים
+טבול כל חתיכת עוף בסדר הבא:
+קמח → ביצה → תערובת פירורים/ביסלי
+בעת ציפוי בפירורים, לחץ מעט עם כף היד כדי להשטיח את השניצל ולעזור לציפוי להידבק.</li><li>סיום הציפוי
+צפה את כל חתיכות העוף לפני תחילת הטיגון.</li><li>טיגון
+חמם חצי מהשמן במחבת עמוקה על חום בינוני-גבוה.
+טגן את השניצלים עד שהם זהובים ופריכים.</li></ol>
+  </div>
+</body>
+</html>

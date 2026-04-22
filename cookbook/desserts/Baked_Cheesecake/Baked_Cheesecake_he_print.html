@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>עוגת גבינה אפויה – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-right: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-right: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    right: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-right: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-right: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-right: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+</style>
+</head>
+<body>
+  <h1>עוגת גבינה אפויה</h1>
+  <p>בניגוד לעוגה האמריקאית הדחוסה והכבדה, הגרסה הישראלית היא חגיגה של קלילות עננית ואווריריות יוצאת דופן. זהו קינוח נימוח שנמס בפה, המציע חוויה מעודנת שמשאירה טעם של עוד בלי התחושה הכבדה.</p>
+  <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+  <div class="section-box">
+    <h2>מצרכים</h2>
+    <ul><li class="ing-heading">לבסיס העוגה</li><li>750 גרם גבינה לבנה 5% או גבינה בסגנון "יוגורט" (מסוננת מנוזלים).</li><li>6 ביצים (L), מופרדות לחלבונים וחלמונים.</li><li>1 כוס סוכר.</li><li>5 כפות קורנפלור (שטוחות).</li><li>3 כפות אינסטנט פודינג וניל.</li><li>1 כפית תמצית וניל איכותית.</li><li class="ing-heading">לציפוי קרם וניל</li><li>250 מ"ל (מכל אחד) שמנת מתוקה להקצפה 38%.</li><li>1 כוס (240 מ"ל) חלב קר.</li><li>1 חבילה (80 גרם) אינסטנט פודינג וניל.</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>הוראות הכנה</h2>
+    <ol><li><strong class="step-heading">הכנת מסת הגבינה</strong><br>בקערה גדולה, טורפים את הגבינה הלבנה, החלמונים (הצהובים), תמצית הווניל, הקורנפלור ו-3 כפות פודינג וניל. טורפים היטב עד לקבלת תערובת חלקה ללא גושים.</li><li><strong class="step-heading">הקצפת החלבונים</strong><br>במיקסר במהירות גבוהה, מקציפים את החלבונים (הלבנים). ברגע שמתחיל להיווצר קצף לבן, מוסיפים את הסוכר בהדרגה וממשיכים להקציף עד לקבלת קצף יציב אך גמיש (לא נוקשה מדי).</li><li><strong class="step-heading">איחוד התערובות</strong><br>מעבירים שליש מקצף החלבונים לקערת הגבינה ומערבבים בתנועות קיפול כדי "לשחרר" את התערובת. מוסיפים את יתר הקצף ומקפלים בעדינות רבה עד לאיחוד מלא, כדי לשמור על האווריריות.</li><li><strong class="step-heading">אפייה (שלב א' - המכת חום)</strong><br>מחממים תנור מראש ל-230°C. מניחים בתחתית התנור תבנית עם מים רותחים (ליצירת אדים). מכניסים את העוגה לאפייה של כ-10-15 דקות עד שהחלק העליון מתחיל להזהיב.</li><li><strong class="step-heading">שחרור שוליים</strong><br>מוציאים את העוגה מהתנור ל-5 דקות. מעבירים סכין בדופן הפנימית של התבנית (בעומק של כ-2 ס"מ) כדי להפריד את העוגה מהשוליים. זה מאפשר לעוגה לעלות באופן שווה ולמנוע סדקים.</li><li><strong class="step-heading">אפייה (שלב ב' - ייבוש)</strong><br>מורידים את טמפרטורת התנור ל-150°C ומחזירים את העוגה לאפייה של כשעה נוספת. העוגה מוכנה כשהיא יציבה בשוליים ורוטטת מעט במרכז. משאירים את העוגה להצטננות מלאה בתוך התנור הכבוי עם דלת מעט פתוחה.</li><li><strong class="step-heading">ציפוי והגשה</strong><br>מקציפים שמנת מתוקה, חלב ופודינג לקצפת יציבה. מורחים על העוגה לאחר שהתקררה לגמרי. מומלץ לעטר בשבבי שוקולד מריר או פירות יער.</li></ol>
+  </div>
+</body>
+</html>

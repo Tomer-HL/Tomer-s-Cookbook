@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>קבב עסיסי – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-right: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-right: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    right: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-right: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-right: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-right: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+</style>
+</head>
+<body>
+  <h1>קבב עסיסי</h1>
+  <p>הקבב הטורקי הוא מאכל רחוב אהוב בכל רחבי המזרח התיכון וישראל. המפתח לקבב מוצלח הוא שימוש בבשר טרי ואיכותי וערבוב לא מוגזם. הוספת כבש טחון נותנת טעם עשיר ומסורתי יותר. הכי טוב להגיש ישר מהגריל.</p>
+  <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+  <div class="section-box">
+    <h2>מצרכים</h2>
+    <ul><li>600  גרם בשר בקר טחון טרי (או תערובת בקר וכבש) – עדיף מנתח אסאדו</li><li>בצל גדול אחד, קלוף ומגוררת או קצוץ דק</li><li>צרור פטרוזיליה/כוסברה, קצוצה דק</li><li>1 ½  כפית מלח</li><li>½  כפית סודה לשתייה</li><li>1  כפית פלפל שחור גרוס</li><li>½  כפית כמון</li><li>½  כפית קינמון</li><li>אופציונלי: ¼ כפית בהרט</li><li>אופציונלי: חופן צנוברים או פיסטוקים קצוצים דק</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>הוראות הכנה</h2>
+    <ol><li>שים את כל המצרכים בקערה וערבב היטב עד לתערובת אחידה. קרר את התערובת במקרר לפחות 30 דקות כדי שהטעמים יתפתחו.</li><li>הרטב את הידיים במים או שמן. קח חלק מתערובת הבשר (בגודל כדור גולף) וצור על שיפוד שטוח, או עצב ביד לצורה אובלית.</li><li>צלה על גריל חם או מחבת בחום בינוני-גבוה כ-4-5 דקות מכל צד, עד שהקבב משחים יפה ומבושל לגמרי.</li><li>הגש עם פיתה, טחינה, סלט ישראלי וחמוצים. ניתן גם להגיש על מצע אורז.</li></ol>
+  </div>
+</body>
+</html>

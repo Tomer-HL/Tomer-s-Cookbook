@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Moroccan_Matbucha – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-left: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    left: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-left: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-left: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+</style>
+</head>
+<body>
+  <h1>Moroccan_Matbucha</h1>
+  <p>Matbucha is a classic Moroccan tomato and pepper spread that is slow-cooked to develop a deep, rich, and concentrated flavor. The long cooking time and patience are the key to achieving its perfect texture and taste. It’s excellent as a dip with fresh bread, served alongside hummus and salads, or as a flavorful addition to any meal.</p>
+  <button class="print-button" onclick="window.print()">🖨️ Print</button>
+  <div class="section-box">
+    <h2>Ingredients</h2>
+    <ul><li>6 medium-large ripe tomatoes or 800 g high-quality crushed tomato (recommended: MUTTI)</li><li>2 red peppers, roasted, peeled and chopped</li><li>6–8 garlic cloves, thinly sliced</li><li>5–6 tbsp olive oil</li><li>1 tsp hot paprika</li><li>1 tsp sweet paprika</li><li>1/2 tsp cumin</li><li>1/2–1 tsp chili flakes or 1 fresh chili, finely chopped (to taste)</li><li>1 tsp salt</li><li>1/2 tsp sugar (adjust to taste at the end)</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>Instructions</h2>
+    <ol><li><strong class="step-heading">Roasting the peppers</strong><br>Place the peppers directly over a gas flame or under the oven broiler. Turn occasionally until the skin is fully charred on all sides. Transfer to a sealed bag for 10 minutes,then peel, remove seeds, and chop.</li><li><strong class="step-heading">Start cooking</strong><br>Heat olive oil in a wide, heavy pan over medium-low heat. Add the garlic and sauté gently for 30–60 seconds, until fragrant (do not burn).</li><li><strong class="step-heading">Add ingredients</strong><br>Add the chopped tomatoes or tomato paste, along with the peppers, hot paprika, sweet paprika, cumin, chili, salt, and sugar. Mix well.</li><li><strong class="step-heading">Slow cooking</strong><br>Cook uncovered over medium-low heat for 45–60 minutes. Stir every 5–10 minutes to prevent sticking.</li><li><strong class="step-heading">The matbucha is ready when</strong><br>- Most of the liquid has evaporated.<br>- The texture is thick and jam-like.<br>- You begin to see slight oil separation.</li><li><strong class="step-heading">Taste and finish</strong><br>Taste and adjust seasoning (you can add more salt / chili / a bit of sugar as needed).<br>Optional: Add one fresh crushed garlic clove at the end of cooking and mix.</li><li><strong class="step-heading">Cooling and serving</strong><br>Let the matbucha cool and serve at room temperature or cold.<br>Storage: Store in an airtight container in the refrigerator for up to 5 days.</li></ol>
+  </div>
+</body>
+</html>

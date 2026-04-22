@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Arayes (Meat-Stuffed Pita) – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-left: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    left: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-left: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-left: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <h1>Arayes (Meat-Stuffed Pita)</h1>
+  <p>Arayes is a classic dish that’s incredibly easy to make at home. Originating in Lebanon and Syria, it was brought to Israel by Jewish communities from across the Arab world. Today, it stands as one of Israel's most iconic street foods—crispy on the outside, juicy on the inside, and perfect straight off the grill with a side of tahini.</p>
+  <button class="print-button" onclick="window.print()">🖨️ Print</button>
+  <div class="section-box">
+    <h2>Ingredients</h2>
+    <ul><li>Pitas: 6 pitas, cut into halves or quarters.</li><li>For the Meat Mixture:</li><li>500g fresh ground beef (or a blend of beef with 100g lamb fat / 1/4 lamb meat).</li><li>1/2 bunch of parsley, finely chopped.</li><li>1 large onion, peeled and finely chopped.</li><li>1.5 tsp salt.</li><li>1/2 tsp baking soda.</li><li>1/2 tsp cinnamon.</li><li>1/2 tbsp grill/BBQ seasoning.</li><li>2 tbsp pure maple syrup or silan (date honey).</li><li>1 tsp ground black pepper.</li><li>Optional: A handful of finely chopped nuts (pistachios or pine nuts).</li><li>Preparation</li><li>Chop: Finely chop the onion and parsley as small as possible.</li><li>Mix: In a large bowl, combine the finely chopped onion and parsley with the ground meat and all the remaining ingredients. Mix thoroughly until the texture is uniform.</li><li>Tip: For a richer, more authentic flavor, adding lamb fat is highly recommended.</li><li>Assemble: Cut the pitas into quarters and fill each quarter with the meat mixture. Press firmly to ensure the filling is packed in and wipe any excess meat from the edges.</li><li>Grill: Place the pita quarters on a medium-heat grill with the open side facing down (meat side first) until the meat is browned and seared. Then, flip and grill the other sides until the pita is golden and crispy.</li><li>Pro Tip: To keep the meat juicy, you can lightly spray the grilled side with a bit of water each time you flip them.</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>Instructions</h2>
+    <ol></ol>
+  </div>
+</body>
+</html>

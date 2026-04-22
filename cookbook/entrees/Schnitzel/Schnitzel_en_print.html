@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Israeli Crispy Schnitzel – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-left: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    left: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-left: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-left: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <h1>Israeli Crispy Schnitzel</h1>
+  <p>Classic Israeli Schnitzel is often served in a baguette, challah or pita with:
+Israeli salad
+Coleslaw
+Pickles
+Mayo/Tahini
+Matbucha
+Fried eggplant
+Spicy touch like Yemenite schug or harissa
+
+If you want, I can also adapt this recipe for oven baking or air-frying.</p>
+  <button class="print-button" onclick="window.print()">🖨️ Print</button>
+  <div class="section-box">
+    <h2>Ingredients</h2>
+    <ul><li>6–8 skinless, boneless chicken breast halves sliced to about 1/4inch thickness or 1 kg prepared thin chicken breast cutlets</li><li>1 small bag of BBQ flavored Bissli (about 2.5 oz / 70 g) - optional</li><li>2–3 cups panko breadcrumbs</li><li>1 tbsp sesame</li><li>1 tbsp BBQ/grill spice mix or paprika</li><li>1 cup flour or cornstarch</li><li>1/2 tsp of salt</li><li>4 eggs</li><li>1 tsp mustard</li><li>Vegetable oil for frying</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>Instructions</h2>
+    <ol><li>Prepare the chicken
+Slice the chicken breasts into thin Schnitzel pieces and place them on a wide tray.
+Sprinkle with a bit of salt and let sit for 10 minutes.
+Afterward, pat the pieces dry with paper towels.</li><li>Set up your coating stations
+Plate 1: flour
+Plate 2: beaten eggs + salt + BBQ/paprika seasoning + mustard
+Bowl/tray: panko + sesame + finely crushed BBQ Bissli
+Tip: Use one hand for the dry ingredients (flour and breadcrumb mix) and the other hand for the wet ingredients (egg). This keeps your hands cleaner.</li><li>Coat the Schnitzels
+Dip each chicken piece in this order:
+Flour → Egg → Breadcrumbs/Bissli mixture
+When coating with breadcrumbs, press down with your palm to flatten the Schnitzel and help the coating stick.</li><li>Finish coating
+Coat all the chicken pieces before you begin frying.</li><li>Frying
+Heat half of the oil in a deep skillet over medium-high heat.
+Fry the Schnitzels until golden and crispy.</li></ol>
+  </div>
+</body>
+</html>

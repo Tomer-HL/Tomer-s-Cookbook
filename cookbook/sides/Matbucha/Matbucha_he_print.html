@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>מטבוחה מרוקאית – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-right: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-right: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    right: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-right: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-right: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-right: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+</style>
+</head>
+<body>
+  <h1>מטבוחה מרוקאית</h1>
+  <p>המטבוחה היא ממרח עגבניות ופלפלים מרוקאי קלאסי שמתבשל לאט עד לקבלת עומק טעמים עשיר ומרוכז. זמן הבישול והסבלנות הם הסוד למרקם ולטעם המושלמים. נהדרת כמטבל עם לחם טרי, לצד חומוס וסלטים, או כתוספת לכל ארוחה.</p>
+  <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+  <div class="section-box">
+    <h2>מצרכים</h2>
+    <ul><li>6 עגבניות בינוניות-גדולות, בשלות או 800 גרם רסק עגבניות איכותי (מומלץ MUTTI )</li><li>2  פלפלים אדומים, צלויים, קלופים וקצוצים</li><li>6–8 שיני שום, פרוסות דק</li><li>5–6 כפות שמן זית</li><li>1 כפית פפריקה חריפה</li><li>1 כפית פפריקה מתוקה</li><li>½ כפית כמון</li><li>½–1 כפית פלפל חריף גרוס או פלפל חריף טרי קצוץ (לפי הטעם)</li><li>1 כפית מלח</li><li>½ כפית סוכר (ולהוסיף לפי הטעם בסוף אם צריך)</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>הוראות הכנה</h2>
+    <ol><li><strong class="step-heading">צליית הפלפלים</strong><br>הנח את הפלפלים ישירות על להבת גז או מתחת לגריל בתנור. הפוך מדי פעם עד שהקליפה שרופה היטב מכל הצדדים. העבר לשקית סגורה ל-10 דקות, לאחר מכן קלף, הסר גרעינים וקצוץ.</li><li><strong class="step-heading">תחילת הבישול</strong><br>חמם שמן זית במחבת רחבה וכבדה על חום בינוני-נמוך. הוסף את השום וטגן בעדינות 30–60 שניות בלבד, עד שעולה ריח (להיזהר לא לשרוף).</li><li><strong class="step-heading">הוספת המרכיבים</strong><br>הוסף את העגבניות הקצוצות או רסק העגבניות, יחד עם הפלפלים, הפפריקה החריפה, הפפריקה המתוקה, הכמון, הפלפל החריף, המלח והסוכר. ערבב היטב.</li><li><strong class="step-heading">בישול איטי</strong><br>בשל ללא מכסה על חום בינוני-נמוך במשך 45–60 דקות. ערבב כל   5–10דקות כדי למנוע הידבקות.</li><li><strong class="step-heading">המטבוחה מוכנה כאשר</strong><br>•	רוב הנוזלים התאדו<br>•	המרקם סמיך וריבתי<br>•	מתחילים לראות הפרדה קלה של שמן מהתערובת.</li><li><strong class="step-heading">טעימה וסיום</strong><br>טעם ותקן תיבול (אפשר להוסיף עוד מלח / חריף / מעט סוכר לפי הצורך).<br>אופציונלי: הוסף שן שום כתושה טרייה בסוף הבישול וערבב.<br>קירור והגשה: הנח למטבוחה להתקרר והגש בטמפרטורת חדר או קר.<br>אחסון: שמור בכלי אטום במקרר עד 5 ימים.</li></ol>
+  </div>
+</body>
+</html>
