@@ -27,13 +27,25 @@ body {
     padding: 28px 32px 32px;
     position: relative;
 }
-.hero {
+.hero-wrapper {
+    position: relative;
     width: 100%;
-    height: 260px;
-    object-fit: cover;
+    height: 260px; /* גובה קבוע (ברירת מחדל 260px) */
     border-radius: 14px;
     margin: 20px 0 24px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    overflow: hidden;           /* חותך את מה שגולש מה-scale */
+    background: #f5eee4;        /* fallback אם התמונה לא נטענה */
+}
+.hero {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;     /* מתיישב בדיוק — התמונה עובדה לאותו יחס */
+    background-repeat: no-repeat;
+    /* background-image, background-position, transform, transform-origin
+       מוזרקים inline מתוך Python לפי Position ו-Zoom */
 }
 .top-bar {
     display: flex;
@@ -161,6 +173,25 @@ ol li::before {
     line-height: 28px;
     font-weight: bold;
 }
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
 </style>
 </head>
 <body>
@@ -173,7 +204,7 @@ ol li::before {
     </div>
   </div>
 
-  <img class="hero" src="Arayes.png" alt="Arayes (Meat-Stuffed Pita)">
+  <div class="hero-wrapper"><div class="hero" role="img" aria-label="Arayes (Meat-Stuffed Pita)" style="background-image: url('Arayes.png'); background-position: center center; transform: scale(1.0); transform-origin: center center;"></div></div>
   <div class="header-bar"></div>
 
   <div class="header">
@@ -190,12 +221,12 @@ ol li::before {
 
   <div class="section-box">
     <h2>Ingredients</h2>
-    <ul><li>Pitas: 6 pitas, cut into halves or quarters.</li><li>For the Meat Mixture:</li><li>500g fresh ground beef (or a blend of beef with 100g lamb fat / 1/4 lamb meat).</li><li>1/2 bunch of parsley, finely chopped.</li><li>1 large onion, peeled and finely chopped.</li><li>1.5 tsp salt.</li><li>1/2 tsp baking soda.</li><li>1/2 tsp cinnamon.</li><li>1/2 tbsp grill/BBQ seasoning.</li><li>2 tbsp pure maple syrup or silan (date honey).</li><li>1 tsp ground black pepper.</li><li>Optional: A handful of finely chopped nuts (pistachios or pine nuts).</li><li>Preparation</li><li>Chop: Finely chop the onion and parsley as small as possible.</li><li>Mix: In a large bowl, combine the finely chopped onion and parsley with the ground meat and all the remaining ingredients. Mix thoroughly until the texture is uniform.</li><li>Tip: For a richer, more authentic flavor, adding lamb fat is highly recommended.</li><li>Assemble: Cut the pitas into quarters and fill each quarter with the meat mixture. Press firmly to ensure the filling is packed in and wipe any excess meat from the edges.</li><li>Grill: Place the pita quarters on a medium-heat grill with the open side facing down (meat side first) until the meat is browned and seared. Then, flip and grill the other sides until the pita is golden and crispy.</li><li>Pro Tip: To keep the meat juicy, you can lightly spray the grilled side with a bit of water each time you flip them.</li></ul>
+    <ul><li>Pitas: 6 pitas, cut into halves or quarters.</li><li class="ing-heading">For the Meat Mixture</li><li>500g fresh ground beef (or a blend of beef with 100g lamb fat / 1/4 lamb meat).</li><li>1/2 bunch of parsley, finely chopped.</li><li>1 large onion, peeled and finely chopped.</li><li>1.5 tsp salt.</li><li>1/2 tsp baking soda.</li><li>1/2 tsp cinnamon.</li><li>1/2 tbsp grill/BBQ seasoning.</li><li>2 tbsp pure maple syrup or silan (date honey).</li><li>1 tsp ground black pepper.</li><li>Optional: A handful of finely chopped nuts (pistachios or pine nuts).</li></ul>
   </div>
   <div class="divider"></div>
   <div class="section-box">
     <h2>Instructions</h2>
-    <ol></ol>
+    <ol><li><strong class="step-heading">Chop</strong><br>Finely chop the onion and parsley as small as possible.</li><li><strong class="step-heading">Mix</strong><br>In a large bowl, combine the finely chopped onion and parsley with the ground meat and all the remaining ingredients. Mix thoroughly until the texture is uniform.<br>Tip:For a richer, more authentic flavor, adding lamb fat is highly recommended.</li><li><strong class="step-heading">Assemble</strong><br>Cut the pitas into quarters and fill each quarter with the meat mixture. Press firmly to ensure the filling is packed in and wipe any excess meat from the edges.</li><li><strong class="step-heading">Grill</strong><br>Place the pita quarters on a medium-heat grill with the open side facing down (meat side first) until the meat is browned and seared. Then, flip and grill the other sides until the pita is golden and crispy.<br>Pro Tip: To keep the meat juicy, you can lightly spray the grilled side with a bit of water each time you flip them.</li></ol>
   </div>
 </div>
 </body>
