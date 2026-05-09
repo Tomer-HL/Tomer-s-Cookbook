@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>עראייס</title>
+<title>Schug (Yemenite Hot Sauce)</title>
 <style>
 :root {
     --orange: #d35400;
@@ -11,7 +11,7 @@
     --border: #f7d8c5;
 }
 body {
-    font-family: Alef, system-ui, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: linear-gradient(180deg, #fdf8f0 0%, #fffefc 100%);
     margin: 0;
     padding: 40px 16px;
@@ -132,38 +132,38 @@ h2 { font-size: 20px; margin-bottom: 10px; color: var(--orange); }
 
 ul {
     list-style: none;
-    padding-right: 28px;
+    padding-left: 28px;
     margin: 0;
 }
 ul li {
     position: relative;
-    padding-right: 28px;
+    padding-left: 28px;
     margin-bottom: 6px;
 }
 ul li::before {
     content: "❖";
     color: var(--orange);
     position: absolute;
-    right: 0;
+    left: 0;
 }
 ol {
     list-style: none;
     counter-reset: step-counter;
-    padding-right: 0;
+    padding-left: 0;
     margin: 0;
 }
 ol li {
     counter-increment: step-counter;
     position: relative;
     margin-bottom: 14px;
-    padding-right: 36px;
+    padding-left: 36px;
     font-size: 15px;
 }
 ol li::before {
     content: counter(step-counter);
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     width: 28px;
     height: 28px;
     border-radius: 50%;
@@ -176,7 +176,7 @@ ol li::before {
 /* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
 ul li.ing-heading {
     list-style: none;
-    padding-right: 0;
+    padding-left: 0;
     margin-top: 14px;
     margin-bottom: 6px;
     font-weight: 700;
@@ -192,46 +192,41 @@ ol li .step-heading {
     font-weight: 700;
     margin-bottom: 4px;
 }
-/* תווית מובילה inline בתוך שורה (כמו "Tip:" ב-"Tip: Freeze portions...") */
-.inline-label {
-    color: var(--orange);
-    font-weight: 700;
-}
 </style>
 </head>
 <body>
 <div class="page">
   <div class="top-bar">
-    <a class="back-link" href="../../index_he.html">→ חזרה לאינדקס</a>
+    <a class="back-link" href="../../index_en.html">← Back to Index</a>
     <div class="top-right">
-      <a class="lang-switch" href="Arayes_en.html"><img src="../../flag_gb.png" alt="English"> English</a>
-      <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+      <a class="lang-switch" href="Schug_he.html"><img src="../../flag_il.png" alt="עברית"> עברית</a>
+      <button class="print-button" onclick="window.print()">🖨️ Print</button>
     </div>
   </div>
 
-  <div class="hero-wrapper"><div class="hero" role="img" aria-label="עראייס" style="background-image: url('Arayes.png'); background-position: center center; transform: scale(1.0); transform-origin: center center;"></div></div>
+  <div class="hero-wrapper"><div class="hero" role="img" aria-label="Schug (Yemenite Hot Sauce)" style="background-image: url('Schug.png'); background-position: center center; transform: scale(1.0); transform-origin: center center;"></div></div>
   <div class="header-bar"></div>
 
   <div class="header">
-    <div class="tag">מתכון</div>
-    <h1>עראייס</h1>
-    <div class="subtitle">מנה קלאסית שקל להכין בבית.</div>
-    <div class="description">עראייס הוא מאכל קלאסי שקל מאוד להכין בבית. מקורו בלבנון וסוריה, והוא הובא לישראל על ידי קהילות יהודיות מרחבי העולם הערבי. כיום הוא נחשב לאחד ממאכלי הרחוב האייקוניים ביותר בישראל – קריספי מבחוץ, עסיסי מבפנים, ומושלם כשהוא יוצא מהגריל לצד טחינה.</div>
+    <div class="tag">RECIPE</div>
+    <h1>Schug (Yemenite Hot Sauce)</h1>
+    <div class="subtitle">A classic dish you can easily make at home.</div>
+    <div class="description">Schug is Israel's national hot sauce — brought over by Yemenite Jews and embraced across the country ever since. It's a bold, garlicky, flavor-packed condiment that goes well with just about everything. The name comes from the maschag, a traditional grinding stone used to break down raw peppers and garlic into a paste.</div>
     <div class="meta">
-      <div class="meta-item"><span class="icon">🕒</span> <b>זמן:</b> 50 דקות</div>
-      <div class="meta-item"><span class="icon">🍽️</span> <b>מנות:</b> 4</div>
-      <div class="meta-item"><span class="icon">🧑‍🍳</span> <b>רמת קושי:</b> בינוני</div>
+      <div class="meta-item"><span class="icon">🕒</span> <b>Time:</b> 30 minutes</div>
+      <div class="meta-item"><span class="icon">🍽️</span> <b>Servings:</b> 8</div>
+      <div class="meta-item"><span class="icon">🧑‍🍳</span> <b>Level:</b> Easy</div>
     </div>
   </div>
 
   <div class="section-box">
-    <h2>מצרכים</h2>
-    <ul><li><strong class="inline-label">פיתות:</strong> 6 פיתות, חתוכות לחצאים או רבעים.</li><li class="ing-heading">לתערובת הבשר</li><li>500 גרם בשר בקר טחון טרי (או תערובת של בקר עם 100 גרם שומן טלה / רבע כמות בשר טלה).</li><li>1/2 צרור פטרוזיליה, קצוצה דק.</li><li>1 בצל גדול, קלוף וקצוץ דק.</li><li>1.5 כפית מלח.</li><li>1/2 כפית סודה לשתייה.</li><li>1/2 כפית קינמון.</li><li>1/2 כף תבלין לגריל/ברביקיו.</li><li>2 כפות מייפל טהור או סילאן (דבש תמרים).</li><li>1 כפית פלפל שחור טחון.</li><li><strong class="inline-label">אופציונלי:</strong> חופן אגוזים קצוצים דק (פיסטוקים או צנוברים).</li></ul>
+    <h2>Ingredients</h2>
+    <ul><li>12 hot peppers, red or green (small and thin variety)</li><li>1 head of garlic, peeled</li><li>1 bunch of cilantro</li><li>1 tsp cumin</li><li>1 tsp salt</li><li>1/4–1/2 cup water</li><li>1 tsp cardamom (optional)</li></ul>
   </div>
   <div class="divider"></div>
   <div class="section-box">
-    <h2>הוראות הכנה</h2>
-    <ol><li><strong class="step-heading">קיצוץ</strong><br>קצצו את הבצל והפטרוזיליה דק ככל האפשר.</li><li><strong class="step-heading">ערבוב</strong><br>בקערה גדולה, ערבבו את הבצל והפטרוזיליה הקצוצים עם הבשר הטחון וכל שאר המרכיבים. ערבבו היטב עד לקבלת תערובת אחידה.<br><strong class="inline-label">טיפ:</strong> לקבלת טעם עשיר ואותנטי יותר, מומלץ מאוד להוסיף שומן טלה.</li><li><strong class="step-heading">הרכבה</strong><br>חתכו את הפיתות לרבעים ומלאו כל רבע בתערובת הבשר. דחסו את המילוי בחוזקה פנימה ונקו שאריות בשר מהקצוות של הפיתה.</li><li><strong class="step-heading">צלייה</strong><br>הניחו את רבעי העראייס על גריל בחום בינוני כאשר הצד הפתוח פונה כלפי מטה (צד הבשר תחילה) עד שהבשר משחים ונסגר. לאחר מכן, הפכו וצלו את שאר הצדדים עד שהפיתה מזהיבה ונהיית קריספית.<br><strong class="inline-label">טיפ למקצוענים:</strong> כדי לשמור על עסיסיות הבשר, ניתן להתיז מעט מים על הצד הצלוי בכל פעם שהופכים את העראייס.</li></ol>
+    <h2>Instructions</h2>
+    <ol><li>Cut the stems off the peppers, but leave the seeds in — that's where the heat is. For best results, use small thin hot peppers, usually found at a Latin or Middle Eastern grocery.</li><li>Roughly chop the peppers and add to a food processor together with the garlic. Pulse for about 30 seconds.</li><li>Roughly chop the cilantro and add to the food processor along with the cumin, salt, cardamom, and water — start with 1/4 cup and add more if needed. Pulse for another 30 seconds until you reach a coarse, spreadable texture.</li><li>Transfer to a clean, sealed jar and refrigerate. Keeps for up to 2 weeks in the fridge.<br><strong>Tip:</strong> Freeze portions in small Ziploc bags and transfer to the fridge when ready to use.<br><strong>Yield:</strong> Approximately 1–1.5 cups</li></ol>
   </div>
 </div>
 </body>

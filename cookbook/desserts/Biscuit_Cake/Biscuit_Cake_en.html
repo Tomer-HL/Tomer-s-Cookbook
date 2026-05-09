@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>עראייס</title>
+<title>Biscuit Cake</title>
 <style>
 :root {
     --orange: #d35400;
@@ -11,7 +11,7 @@
     --border: #f7d8c5;
 }
 body {
-    font-family: Alef, system-ui, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: linear-gradient(180deg, #fdf8f0 0%, #fffefc 100%);
     margin: 0;
     padding: 40px 16px;
@@ -132,38 +132,38 @@ h2 { font-size: 20px; margin-bottom: 10px; color: var(--orange); }
 
 ul {
     list-style: none;
-    padding-right: 28px;
+    padding-left: 28px;
     margin: 0;
 }
 ul li {
     position: relative;
-    padding-right: 28px;
+    padding-left: 28px;
     margin-bottom: 6px;
 }
 ul li::before {
     content: "❖";
     color: var(--orange);
     position: absolute;
-    right: 0;
+    left: 0;
 }
 ol {
     list-style: none;
     counter-reset: step-counter;
-    padding-right: 0;
+    padding-left: 0;
     margin: 0;
 }
 ol li {
     counter-increment: step-counter;
     position: relative;
     margin-bottom: 14px;
-    padding-right: 36px;
+    padding-left: 36px;
     font-size: 15px;
 }
 ol li::before {
     content: counter(step-counter);
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     width: 28px;
     height: 28px;
     border-radius: 50%;
@@ -176,7 +176,7 @@ ol li::before {
 /* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
 ul li.ing-heading {
     list-style: none;
-    padding-right: 0;
+    padding-left: 0;
     margin-top: 14px;
     margin-bottom: 6px;
     font-weight: 700;
@@ -192,46 +192,41 @@ ol li .step-heading {
     font-weight: 700;
     margin-bottom: 4px;
 }
-/* תווית מובילה inline בתוך שורה (כמו "Tip:" ב-"Tip: Freeze portions...") */
-.inline-label {
-    color: var(--orange);
-    font-weight: 700;
-}
 </style>
 </head>
 <body>
 <div class="page">
   <div class="top-bar">
-    <a class="back-link" href="../../index_he.html">→ חזרה לאינדקס</a>
+    <a class="back-link" href="../../index_en.html">← Back to Index</a>
     <div class="top-right">
-      <a class="lang-switch" href="Arayes_en.html"><img src="../../flag_gb.png" alt="English"> English</a>
-      <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+      <a class="lang-switch" href="Biscuit_Cake_he.html"><img src="../../flag_il.png" alt="עברית"> עברית</a>
+      <button class="print-button" onclick="window.print()">🖨️ Print</button>
     </div>
   </div>
 
-  <div class="hero-wrapper"><div class="hero" role="img" aria-label="עראייס" style="background-image: url('Arayes.png'); background-position: center center; transform: scale(1.0); transform-origin: center center;"></div></div>
+  <div class="hero-wrapper"><div class="hero" role="img" aria-label="Biscuit Cake" style="background-image: url('Biscuit_Cake.jpg'); background-position: center center; transform: scale(1.0); transform-origin: center center;"></div></div>
   <div class="header-bar"></div>
 
   <div class="header">
-    <div class="tag">מתכון</div>
-    <h1>עראייס</h1>
-    <div class="subtitle">מנה קלאסית שקל להכין בבית.</div>
-    <div class="description">עראייס הוא מאכל קלאסי שקל מאוד להכין בבית. מקורו בלבנון וסוריה, והוא הובא לישראל על ידי קהילות יהודיות מרחבי העולם הערבי. כיום הוא נחשב לאחד ממאכלי הרחוב האייקוניים ביותר בישראל – קריספי מבחוץ, עסיסי מבפנים, ומושלם כשהוא יוצא מהגריל לצד טחינה.</div>
+    <div class="tag">RECIPE</div>
+    <h1>Biscuit Cake</h1>
+    <div class="subtitle">A classic dish you can easily make at home.</div>
+    <div class="description">The most nostalgic and beloved dessert in Israel. It’s easy to make, requires no baking, and is perfect for making with kids. The combination of rich vanilla cream and soft biscuit layers creates a perfect result with minimal effort.</div>
     <div class="meta">
-      <div class="meta-item"><span class="icon">🕒</span> <b>זמן:</b> 50 דקות</div>
-      <div class="meta-item"><span class="icon">🍽️</span> <b>מנות:</b> 4</div>
-      <div class="meta-item"><span class="icon">🧑‍🍳</span> <b>רמת קושי:</b> בינוני</div>
+      <div class="meta-item"><span class="icon">🕒</span> <b>Time:</b> 30 minutes</div>
+      <div class="meta-item"><span class="icon">🍽️</span> <b>Servings:</b> 4</div>
+      <div class="meta-item"><span class="icon">🧑‍🍳</span> <b>Level:</b> Easy</div>
     </div>
   </div>
 
   <div class="section-box">
-    <h2>מצרכים</h2>
-    <ul><li><strong class="inline-label">פיתות:</strong> 6 פיתות, חתוכות לחצאים או רבעים.</li><li class="ing-heading">לתערובת הבשר</li><li>500 גרם בשר בקר טחון טרי (או תערובת של בקר עם 100 גרם שומן טלה / רבע כמות בשר טלה).</li><li>1/2 צרור פטרוזיליה, קצוצה דק.</li><li>1 בצל גדול, קלוף וקצוץ דק.</li><li>1.5 כפית מלח.</li><li>1/2 כפית סודה לשתייה.</li><li>1/2 כפית קינמון.</li><li>1/2 כף תבלין לגריל/ברביקיו.</li><li>2 כפות מייפל טהור או סילאן (דבש תמרים).</li><li>1 כפית פלפל שחור טחון.</li><li><strong class="inline-label">אופציונלי:</strong> חופן אגוזים קצוצים דק (פיסטוקים או צנוברים).</li></ul>
+    <h2>Ingredients</h2>
+    <ul><li>1 pack (250g) Petit Beurre biscuits (Vanilla or Chocolate)</li><li>1 cup milk (for dipping the biscuits)</li><li>Chocolate shavings (50g dark chocolate) for topping</li><li class="ing-heading">For the Cream</li><li>1 cup (250ml) heavy whipping cream, chilled</li><li>½ cup milk</li><li>1 pack (80g) instant vanilla pudding mix</li><li>250g (approx. 1 cup) natural yogurt (4%–5%) or soft white cheese/sour cream (5%–9% fat)</li></ul>
   </div>
   <div class="divider"></div>
   <div class="section-box">
-    <h2>הוראות הכנה</h2>
-    <ol><li><strong class="step-heading">קיצוץ</strong><br>קצצו את הבצל והפטרוזיליה דק ככל האפשר.</li><li><strong class="step-heading">ערבוב</strong><br>בקערה גדולה, ערבבו את הבצל והפטרוזיליה הקצוצים עם הבשר הטחון וכל שאר המרכיבים. ערבבו היטב עד לקבלת תערובת אחידה.<br><strong class="inline-label">טיפ:</strong> לקבלת טעם עשיר ואותנטי יותר, מומלץ מאוד להוסיף שומן טלה.</li><li><strong class="step-heading">הרכבה</strong><br>חתכו את הפיתות לרבעים ומלאו כל רבע בתערובת הבשר. דחסו את המילוי בחוזקה פנימה ונקו שאריות בשר מהקצוות של הפיתה.</li><li><strong class="step-heading">צלייה</strong><br>הניחו את רבעי העראייס על גריל בחום בינוני כאשר הצד הפתוח פונה כלפי מטה (צד הבשר תחילה) עד שהבשר משחים ונסגר. לאחר מכן, הפכו וצלו את שאר הצדדים עד שהפיתה מזהיבה ונהיית קריספית.<br><strong class="inline-label">טיפ למקצוענים:</strong> כדי לשמור על עסיסיות הבשר, ניתן להתיז מעט מים על הצד הצלוי בכל פעם שהופכים את העראייס.</li></ol>
+    <h2>Instructions</h2>
+    <ol><li><strong class="step-heading">Prepare the Cream</strong><br>In a large bowl, combine the heavy cream, ½ cup of milk, and the instant pudding mix. Whip until the mixture is stable and airy.<br>Gently fold in the yogurt (or soft cheese) using a spatula until the cream is smooth and uniform.</li><li><strong class="step-heading">Dip the Biscuits</strong><br>Pour 1 cup of milk into a shallow bowl. Dip each biscuit into the milk for only 1–2 seconds.<br>Tip: Do not soak them, or they will become mushy!</li><li><strong class="step-heading">Assemble the Cake</strong><br>Base: Arrange a single layer of dipped biscuits at the bottom of a small rectangular or square baking dish.<br>Layering: Spread a layer of the cream evenly over the biscuits.<br>Repeat: Add another layer of dipped biscuits, then cream. Repeat until you have at least 3 layers of biscuits.<br>Top: Finish with a final layer of cream and smooth it out with a spatula.</li><li><strong class="step-heading">Garnish and Chill</strong><br>Sprinkle the grated dark chocolate over the top.<br>Refrigerate for at least 2 hours to set. For the best texture, refrigerate for 4 hours or overnight.</li><li><strong class="step-heading">Serving</strong><br>Cut and serve directly from the dish.<br>Pro Tip: For a semi-frozen treat, chill in the fridge for 4 hours first, then move to the freezer for a short time before serving.<br>💡 Key Tips:<br>Stable Cream: Ensure your cream is whipped until stiff peaks form to prevent the cake from "sliding."<br>Quick Dip: A very quick dip in the milk is all you need; the biscuits will continue to soften from the cream's moisture.<br>Texture Balance: Using yogurt provides a lighter, tangier taste, while soft cheese gives it a richer, more traditional Israeli texture.</li></ol>
   </div>
 </div>
 </body>
