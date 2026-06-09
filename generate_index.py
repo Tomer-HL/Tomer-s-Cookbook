@@ -91,8 +91,8 @@ def scan_cookbook(lang: str) -> dict[str, list[dict]]:
 
             result[cat].append({
                 "title":      title,
-                "html":       str(rel_path).replace("\\", "/"),
-                "image":      str(Path(recipe_dir.relative_to(COOKBOOK_DIR) / image_file)).replace("\\", "/")
+                "html":       "/cookbook/" + str(rel_path).replace("\\", "/"),
+                "image":      "/cookbook/" + str(Path(recipe_dir.relative_to(COOKBOOK_DIR) / image_file)).replace("\\", "/")
                               if image_file else None,
             })
 
@@ -109,9 +109,9 @@ def build_index(lang: str) -> str:
 
     title    = SITE_TITLE_HE    if is_he else SITE_TITLE_EN
     subtitle = SITE_SUBTITLE_HE if is_he else SITE_SUBTITLE_EN
-    other    = "index_en.html"  if is_he else "index_he.html"
-    switch   = '<img src="flag_gb.png" alt="EN"> English' if is_he else \
-               '<img src="flag_il.png" alt="עב"> עברית'
+    other    = "/cookbook/" if is_he else "/cookbook/index_he.html"
+    switch   = '<img src="/cookbook/flag_gb.png" alt="EN"> English' if is_he else \
+               '<img src="/cookbook/flag_il.png" alt="עב"> עברית'
     no_img   = "אין תמונה"      if is_he else "No image"
 
     data = scan_cookbook(lang)
