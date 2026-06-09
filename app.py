@@ -536,7 +536,10 @@ def _configure_git_credentials() -> None:
     if not token or not repo:
         return
     remote_url = f"https://{token}@github.com/{repo}.git"
-    _git("remote", "set-url", "origin", remote_url)
+    # set-url fails if origin doesn't exist yet — fall back to add
+    result = _git("remote", "set-url", "origin", remote_url)
+    if result.returncode != 0:
+        _git("remote", "add", "origin", remote_url)
     _git("config", "user.email", os.environ.get("GIT_EMAIL", "cookbook@app.local"))
     _git("config", "user.name",  os.environ.get("GIT_NAME",  "Cookbook App"))
     print("[GIT] Credentials configured.")
