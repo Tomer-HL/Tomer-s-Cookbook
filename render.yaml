@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: tomer-cookbook-editor
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 2
+    envVars:
+      - key: EDIT_PASSWORD
+        sync: false          # Set this in the Render dashboard — never commit it
+      - key: SECRET_KEY
+        generateValue: true  # Render auto-generates a secure random value
+      - key: GITHUB_TOKEN
+        sync: false          # Your GitHub Personal Access Token
+      - key: GITHUB_REPO
+        value: tomer-hl/Tomer-s-Cookbook
+      - key: GIT_EMAIL
+        value: tomerhilel89@gmail.com
+      - key: GIT_NAME
+        value: Tomer Hillel
+      - key: RENDER
+        value: "true"

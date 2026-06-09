@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Error</title>
+<style>
+body {
+    font-family: 'Lato', system-ui, sans-serif;
+    background: #fdf8f0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+.card {
+    background: #fff;
+    max-width: 600px;
+    border: 1px solid #f0e0d0;
+    border-radius: 14px;
+    padding: 36px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+h1 { color: #c0392b; margin-bottom: 12px; }
+pre {
+    background: #fdf3ee;
+    padding: 14px;
+    border-radius: 8px;
+    overflow: auto;
+    font-size: 13px;
+    border: 1px solid #f0d8c8;
+    white-space: pre-wrap;
+}
+a {
+    display: inline-block;
+    margin-top: 16px;
+    color: #d35400;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid #d35400;
+    padding: 9px 18px;
+    border-radius: 10px;
+}
+a:hover { background: rgba(211,84,0,0.08); }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>⚠️ Something went wrong</h1>
+  <p>The recipe couldn't be created. The script reported:</p>
+  <pre>{{ message }}</pre>
+  <a href="/">← Back to form</a>
+</div>
+</body>
+</html>

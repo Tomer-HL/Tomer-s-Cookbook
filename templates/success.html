@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Created — {{ recipe }}</title>
+<link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --orange: #d35400; --orange-light: #f39c12;
+    --bg: #fdf8f0; --card-bg: #ffffff; --border: #f0e0d0;
+    --text: #2c1a0e; --muted: #7a6a5a; --green: #27ae60;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Lato', system-ui, sans-serif;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(211,84,0,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(243,156,18,0.07) 0%, transparent 60%);
+    min-height: 100vh; color: var(--text);
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+}
+.card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 40px 36px;
+    max-width: 540px; width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center;
+}
+.checkmark {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--green); color: #fff;
+    font-size: 38px; line-height: 72px; margin: 0 auto 18px;
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.25);
+}
+h1 { color: var(--orange); font-size: 28px; margin-bottom: 8px; }
+.subtitle { color: var(--muted); font-size: 15px; margin-bottom: 14px; }
+.lang-tag {
+    display: inline-block; background: rgba(211,84,0,0.08); color: var(--orange);
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; padding: 4px 12px; border-radius: 12px; margin-bottom: 16px;
+}
+.recipe-name {
+    font-size: 22px; font-weight: 700; color: var(--text);
+    background: #fffaf0; border: 1px dashed var(--border);
+    padding: 10px 20px; border-radius: 10px;
+    display: inline-block; margin-bottom: 24px;
+}
+.links { display: grid; gap: 12px; margin: 18px 0; }
+.links.both { grid-template-columns: 1fr 1fr; }
+@media (max-width: 480px) { .links.both { grid-template-columns: 1fr; } }
+.link-btn {
+    text-decoration: none; background: var(--orange); color: #fff;
+    padding: 14px 16px; border-radius: 10px;
+    font-weight: 600; font-size: 15px; transition: background 0.15s;
+}
+.link-btn:hover { background: #b34800; }
+.link-btn.he { font-family: 'Alef', system-ui, sans-serif; direction: rtl; }
+.edit-btn {
+    display: inline-block; margin-top: 14px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    color: #fff; padding: 12px 28px; border-radius: 10px;
+    font-weight: 700; font-size: 15px;
+    box-shadow: 0 4px 12px rgba(243,156,18,0.3);
+    transition: transform 0.05s, box-shadow 0.15s;
+}
+.edit-btn:hover {
+    box-shadow: 0 6px 16px rgba(243,156,18,0.4);
+}
+.edit-btn:active { transform: translateY(1px); }
+.tip {
+    margin-top: 18px; padding: 12px 14px;
+    background: #fff8e1; border-left: 3px solid var(--orange-light);
+    border-radius: 8px; font-size: 13px;
+    color: var(--text); text-align: right; line-height: 1.5;
+    font-family: 'Alef', system-ui, sans-serif; direction: rtl;
+}
+.tip code {
+    background: rgba(211,84,0,0.12); padding: 1px 6px;
+    border-radius: 4px; font-family: monospace; font-weight: 700;
+}
+.secondary-links {
+    margin-top: 24px; padding-top: 22px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
+}
+.secondary-links a {
+    color: var(--orange); text-decoration: none; font-weight: 600;
+    font-size: 14px; border: 1.5px solid var(--orange);
+    padding: 9px 18px; border-radius: 10px; transition: background 0.15s;
+}
+.secondary-links a:hover { background: rgba(211,84,0,0.08); }
+.path-hint {
+    margin-top: 18px; font-size: 12px; color: var(--muted);
+    background: #fffaf0; border-radius: 8px;
+    padding: 8px 12px; word-break: break-all; font-family: monospace;
+}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="checkmark">✓</div>
+    <h1>Recipe Saved!</h1>
+    <p class="subtitle">המתכון נשמר בהצלחה. ה-index עודכן אוטומטית.</p>
+
+    {% if lang_mode == 'both' %}
+      <span class="lang-tag">🇬🇧 + 🇮🇱  Bilingual</span>
+    {% elif lang_mode == 'en' %}
+      <span class="lang-tag">🇬🇧  English only</span>
+    {% else %}
+      <span class="lang-tag">🇮🇱  עברית בלבד</span>
+    {% endif %}
+
+    <div class="recipe-name">
+      {{ recipe }} <span style="color: var(--muted); font-size: 14px;">({{ category }})</span>
+    </div>
+
+    <div class="links {{ 'both' if lang_mode == 'both' else 'single' }}">
+      {% if lang_mode in ('both', 'en') %}
+        <a class="link-btn" href="/cookbook/{{ category }}/{{ recipe }}/{{ recipe }}_en.html" target="_blank">
+          🇬🇧 View English
+        </a>
+      {% endif %}
+      {% if lang_mode in ('both', 'he') %}
+        <a class="link-btn he" href="/cookbook/{{ category }}/{{ recipe }}/{{ recipe }}_he.html" target="_blank">
+          🇮🇱 הצג עברית
+        </a>
+      {% endif %}
+    </div>
+
+    <a class="edit-btn" href="/edit/{{ category }}/{{ recipe }}">
+      ✏️ ערוך מתכון · Edit Recipe
+    </a>
+
+    <div class="tip">
+      💡 <strong>טיפ:</strong> אם כותרות פנימיות (כמו "הכנת הקרם", "הרכבת העוגה") לא הופיעו מודגשות —
+      ודא שכל שורת כותרת מסתיימת ב-<code>:</code> (נקודתיים).
+      ניתן לתקן זאת באמצעות לחצן "ערוך מתכון" למעלה.
+    </div>
+
+    <div class="secondary-links">
+      <a href="/">➕ Create Another</a>
+      <a href="/cookbook/" target="_blank">📖 View Cookbook</a>
+    </div>
+
+    <div class="path-hint">cookbook/{{ category }}/{{ recipe }}/</div>
+  </div>
+</body>
+</html>

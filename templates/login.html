@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — Tomer's Cookbook Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --orange: #d35400;
+    --orange-light: #f39c12;
+    --bg: #fdf8f0;
+    --card-bg: #ffffff;
+    --border: #f0e0d0;
+    --text: #2c1a0e;
+    --muted: #7a6a5a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Lato', system-ui, sans-serif;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(211,84,0,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(243,156,18,0.07) 0%, transparent 60%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+}
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.09);
+    padding: 44px 40px 40px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+}
+.icon { font-size: 48px; margin-bottom: 12px; }
+h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+.sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-style: italic;
+}
+label {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    background: #fffaf4;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.18s;
+    margin-bottom: 18px;
+}
+input[type="password"]:focus { border-color: var(--orange); }
+button {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, var(--orange) 0%, #b94600 100%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: inherit;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: opacity 0.18s, transform 0.12s;
+    letter-spacing: 0.02em;
+}
+button:hover { opacity: 0.92; transform: translateY(-1px); }
+.error {
+    background: #fff0f0;
+    border: 1px solid #f5c0c0;
+    border-radius: 8px;
+    color: #c0392b;
+    font-size: 13px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    text-align: left;
+}
+.back-link {
+    display: block;
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+}
+.back-link:hover { color: var(--orange); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">📖</div>
+    <h1>Cookbook Editor</h1>
+    <p class="sub">Tomer's Israeli Cookbook — private access</p>
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autofocus placeholder="Enter your password">
+      <button type="submit">Sign in →</button>
+    </form>
+
+    <a class="back-link" href="https://tomer-hl.github.io/Tomer-s-Cookbook/cookbook/index_he.html">
+      ← Back to cookbook
+    </a>
+  </div>
+</body>
+</html>

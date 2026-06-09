@@ -2,3 +2,11 @@
 !/cookbook/
 !/.gitignore
 !/index.html
+!/app.py
+!/generate_recipe.py
+!/generate_index.py
+!/requirements.txt
+!/render.yaml
+!/templates/
+!/flag_gb.png
+!/flag_il.png

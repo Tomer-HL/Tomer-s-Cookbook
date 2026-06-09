@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% if is_edit %}Edit Recipe — {{ prefill.recipe_name }}{% else %}Create a New Recipe — מתכון חדש{% endif %}</title>
+<link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --orange: #d35400;
+    --orange-light: #f39c12;
+    --bg: #fdf8f0;
+    --card-bg: #ffffff;
+    --border: #f0e0d0;
+    --text: #2c1a0e;
+    --muted: #7a6a5a;
+    --section-bg: #fffaf0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Lato', system-ui, sans-serif;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(211,84,0,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(243,156,18,0.07) 0%, transparent 60%);
+    min-height: 100vh;
+    color: var(--text);
+    padding: 0 0 60px;
+}
+header {
+    background: linear-gradient(135deg, #2c1a0e 0%, #5a3010 100%);
+    color: #fff;
+    padding: 30px 24px 26px;
+    text-align: center;
+}
+header h1 { font-size: clamp(22px, 4vw, 32px); font-weight: 700; }
+header h1 .accent { color: var(--orange-light); }
+header p { margin-top: 6px; color: rgba(255,255,255,0.65); font-size: 14px; font-style: italic; }
+header .actions { margin-top: 14px; }
+header .actions a {
+    color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px;
+    background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 16px; margin: 0 4px;
+}
+header .actions a:hover { background: rgba(255,255,255,0.2); }
+
+.layout { max-width: 1100px; margin: 30px auto 0; padding: 0 24px; }
+
+.edit-banner {
+    background: linear-gradient(135deg, #fff8e1 0%, #ffe5b3 100%);
+    border: 1px solid #f5c891;
+    border-left: 4px solid var(--orange);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text);
+}
+.edit-banner code {
+    background: rgba(211,84,0,0.12);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-family: monospace;
+}
+.edit-banner .he-text { font-family: 'Alef', sans-serif; direction: rtl; display: block; margin-top: 4px; }
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+    position: relative;
+}
+.card .step-num {
+    position: absolute;
+    top: -10px; left: 22px;
+    background: var(--orange);
+    color: #fff;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 26px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(211,84,0,0.3);
+}
+.card h2 {
+    color: var(--orange);
+    font-size: 17px;
+    margin-bottom: 14px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.card h2 .he-label { font-family: 'Alef', sans-serif; color: var(--muted); font-size: 14px; font-weight: 400; }
+
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+@media (max-width: 720px) { .row, .row-3 { grid-template-columns: 1fr; } }
+
+.field { display: flex; flex-direction: column; margin-bottom: 12px; }
+.field:last-child { margin-bottom: 0; }
+.field label { font-weight: 600; margin-bottom: 6px; font-size: 14px; color: var(--text); }
+.field .hint { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+input[type="text"], input[type="number"], input[type="file"],
+select, textarea {
+    font-family: inherit;
+    font-size: 15px;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(211,84,0,0.15);
+}
+input[readonly], select[disabled] {
+    background: #f5efe5;
+    color: var(--muted);
+    cursor: not-allowed;
+}
+textarea { resize: vertical; min-height: 110px; line-height: 1.5; }
+.he textarea, .he input, .he select {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Alef', system-ui, sans-serif;
+}
+.he label { font-family: 'Alef', system-ui, sans-serif; }
+
+.lang-block-title {
+    font-size: 12px;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--orange);
+    padding-left: 8px;
+}
+.he .lang-block-title {
+    border-left: none;
+    border-right: 3px solid var(--orange);
+    padding-left: 0;
+    padding-right: 8px;
+    text-align: right;
+    font-family: 'Alef', sans-serif;
+}
+
+.lang-mode-card { background: linear-gradient(135deg, #fff5e6 0%, #fef3e0 100%); border-color: #f5c891; }
+.lang-mode-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+@media (max-width: 600px) { .lang-mode-options { grid-template-columns: 1fr; } }
+.lang-mode-options label {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 14px 12px;
+    border: 2px solid var(--border); border-radius: 12px;
+    cursor: pointer; transition: all 0.15s;
+    background: #fff; font-weight: 600; user-select: none;
+}
+.lang-mode-options label:hover { border-color: var(--orange-light); }
+.lang-mode-options input { display: none; }
+.lang-mode-options label .flag { font-size: 22px; margin-bottom: 4px; }
+.lang-mode-options label .desc { font-size: 11px; color: var(--muted); margin-top: 4px; font-weight: 400; }
+.lang-mode-options input:checked + .pill {
+    border-color: var(--orange);
+    background: linear-gradient(135deg, var(--orange) 0%, #e67e22 100%);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(211,84,0,0.25);
+}
+.lang-mode-options input:checked + .pill .desc { color: rgba(255,255,255,0.85); }
+
+form.mode-en  .show-he-only { display: none !important; }
+form.mode-he  .show-en-only { display: none !important; }
+form.mode-en .row.bilingual,
+form.mode-he .row.bilingual { grid-template-columns: 1fr; }
+form.mode-en .lang-block-title,
+form.mode-he .lang-block-title { display: none; }
+
+#image-preview, .existing-image-preview {
+    margin-top: 10px;
+    width: 100%;
+    max-height: 220px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid var(--border);
+}
+#image-preview { display: none; }
+.existing-image-block {
+    margin-top: 12px;
+    padding: 10px;
+    background: #fffaf0;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+}
+.existing-image-block .label {
+    font-size: 12px; font-weight: 700;
+    color: var(--orange); margin-bottom: 6px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+}
+
+.image-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 18px; align-items: start; }
+@media (max-width: 720px) { .image-row { grid-template-columns: 1fr; } }
+
+.actions-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 0 0; flex-wrap: wrap; gap: 12px;
+}
+.btn {
+    background: var(--orange); color: #fff; border: none;
+    padding: 14px 32px; font-size: 16px; font-weight: 700;
+    border-radius: 10px; cursor: pointer; font-family: inherit;
+    transition: background 0.15s, transform 0.05s;
+}
+.btn:hover { background: #b34800; }
+.btn:active { transform: translateY(1px); }
+.btn-update {
+    background: linear-gradient(135deg, var(--orange-light) 0%, var(--orange) 100%);
+}
+.btn-secondary {
+    background: transparent; color: var(--orange); border: 1.5px solid var(--orange);
+    padding: 10px 20px; font-size: 14px; font-weight: 600;
+    border-radius: 10px; cursor: pointer; text-decoration: none;
+}
+.btn-secondary:hover { background: rgba(211,84,0,0.08); }
+
+.existing {
+    background: var(--section-bg);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+}
+.existing summary { cursor: pointer; font-weight: 600; color: var(--orange); }
+.existing ul { margin-top: 10px; padding-left: 22px; list-style: none; }
+.existing li { margin-bottom: 6px; line-height: 1.6; }
+.existing a { color: var(--text); text-decoration: none; }
+.existing a:hover { color: var(--orange); text-decoration: underline; }
+.existing .edit-link {
+    display: inline-block; margin-left: 8px;
+    color: var(--orange); font-weight: 600;
+    background: rgba(211,84,0,0.08); padding: 2px 10px;
+    border-radius: 8px; font-size: 12px;
+}
+.existing .edit-link:hover {
+    background: var(--orange); color: #fff !important; text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>
+    {% if is_edit %}
+      Edit <span class="accent">Recipe</span> · עריכת מתכון
+    {% else %}
+      Create a New <span class="accent">Recipe</span> · יצירת מתכון חדש
+    {% endif %}
+  </h1>
+  <p>{% if is_edit %}Adjust any field and click Update to regenerate.{% else %}Each section in its own panel — choose your language and fill in the boxes.{% endif %}</p>
+  <div class="actions">
+    <a href="/cookbook/" target="_blank">📖 View Cookbook (English)</a>
+    <a href="/cookbook/index_he.html" target="_blank">📖 ספר המתכונים</a>
+    {% if is_edit %}<a href="/">➕ Create New</a>{% endif %}
+  </div>
+</header>
+
+<div class="layout">
+
+  {% if is_edit %}
+  <div class="edit-banner">
+    ✏️ <strong>Edit mode</strong> — updating <code>{{ prefill.recipe_name }}</code>
+    in <code>{{ prefill.category }}</code>. Submitting will overwrite the existing files.
+    <span class="he-text">לחיצה על "עדכן מתכון" תיצור מחדש את הקבצים. כותרות פנימיות חייבות להסתיים ב-<code>:</code>.</span>
+  </div>
+  {% endif %}
+
+  {% if existing and not is_edit %}
+  <details class="existing">
+    <summary>📚 {{ existing|length }} recipes already in the cookbook — click to expand</summary>
+    <ul>
+      {% for r in existing %}
+        <li>
+          <strong>{{ r.name }}</strong>
+          <span style="color: var(--muted);">({{ r.category }})</span> —
+          {% if r.url_en %}<a href="{{ r.url_en }}" target="_blank">EN</a>{% endif %}
+          {% if r.url_en and r.url_he %} · {% endif %}
+          {% if r.url_he %}<a href="{{ r.url_he }}" target="_blank">HE</a>{% endif %}
+          <a class="edit-link" href="{{ r.edit_url }}">✏️ Edit · ערוך</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </details>
+  {% endif %}
+
+  <form method="post" action="/create" enctype="multipart/form-data" id="recipe-form" class="mode-{{ prefill.lang_mode if prefill else 'both' }}">
+
+    <!-- ===== Card 0: Language mode ===== -->
+    <div class="card lang-mode-card">
+      <span class="step-num">0</span>
+      <h2>🌐 Recipe Language <span class="he-label">· שפת המתכון</span></h2>
+      <div class="lang-mode-options">
+        <label>
+          <input type="radio" name="lang_mode" value="both" {% if not prefill or prefill.lang_mode == 'both' %}checked{% endif %}>
+          <span class="pill" style="display:flex; flex-direction:column; align-items:center; padding:14px 12px; border-radius:10px;">
+            <span class="flag">🇬🇧 + 🇮🇱</span>
+            <span>Bilingual</span>
+            <span class="desc">דו-לשוני · EN + HE</span>
+          </span>
+        </label>
+        <label>
+          <input type="radio" name="lang_mode" value="en" {% if prefill and prefill.lang_mode == 'en' %}checked{% endif %}>
+          <span class="pill" style="display:flex; flex-direction:column; align-items:center; padding:14px 12px; border-radius:10px;">
+            <span class="flag">🇬🇧</span>
+            <span>English only</span>
+            <span class="desc">recipe in English</span>
+          </span>
+        </label>
+        <label>
+          <input type="radio" name="lang_mode" value="he" {% if prefill and prefill.lang_mode == 'he' %}checked{% endif %}>
+          <span class="pill" style="display:flex; flex-direction:column; align-items:center; padding:14px 12px; border-radius:10px;">
+            <span class="flag">🇮🇱</span>
+            <span>רק עברית</span>
+            <span class="desc">Hebrew only</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <!-- ===== Card 1: Identity ===== -->
+    <div class="card">
+      <span class="step-num">1</span>
+      <h2>🏷️ Identity <span class="he-label">· זיהוי</span></h2>
+      <div class="row">
+        <div class="field">
+          <label for="recipe_name">File name (no spaces)</label>
+          <input type="text" id="recipe_name" name="recipe_name"
+                 placeholder="e.g. Arayes" required pattern="[A-Za-z0-9_\-]+"
+                 value="{{ prefill.recipe_name if prefill else '' }}"
+                 {% if is_edit %}readonly{% endif %}>
+          <div class="hint">{% if is_edit %}File name can't be changed in edit mode (it's the folder name).{% else %}Used as folder &amp; file name. English letters, digits, _ and - only.{% endif %}</div>
+        </div>
+        <div class="field">
+          <label for="category">Category · קטגוריה</label>
+          <select id="category" name="category" required {% if is_edit %}disabled{% endif %}>
+            {% for value, label in categories.items() %}
+              <option value="{{ value }}" {% if prefill and prefill.category == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+          {% if is_edit %}<input type="hidden" name="category" value="{{ prefill.category }}">{% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Card 2: Servings ===== -->
+    <div class="card">
+      <span class="step-num">2</span>
+      <h2>🍽️ Servings <span class="he-label">· מנות</span></h2>
+      <div class="field" style="max-width: 200px;">
+        <input type="number" id="servings" name="servings" min="1" max="20"
+               value="{{ prefill.servings if prefill else 4 }}" required>
+      </div>
+    </div>
+
+    <!-- ===== Card 3: Time ===== -->
+    <div class="card">
+      <span class="step-num">3</span>
+      <h2>🕒 Time <span class="he-label">· זמן הכנה</span></h2>
+      <div class="row bilingual">
+        <div class="show-en-only">
+          <div class="lang-block-title">🇬🇧 English</div>
+          <input type="text" id="time_en" name="time_en"
+                 placeholder="e.g. 50 minutes"
+                 value="{{ prefill.time_en if prefill else '30 minutes' }}">
+        </div>
+        <div class="show-he-only he">
+          <div class="lang-block-title">🇮🇱 עברית</div>
+          <input type="text" id="time_he" name="time_he"
+                 placeholder="לדוגמה: 50 דקות"
+                 value="{{ prefill.time_he if prefill else '30 דקות' }}">
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Card 4: Difficulty Level ===== -->
+    <div class="card">
+      <span class="step-num">4</span>
+      <h2>🧑‍🍳 Difficulty Level <span class="he-label">· רמת קושי</span></h2>
+      <div class="row bilingual">
+        <div class="show-en-only">
+          <div class="lang-block-title">🇬🇧 English</div>
+          <select id="level_en" name="level_en">
+            {% for lvl in levels_en %}
+              <option value="{{ lvl }}" {% if prefill and prefill.level_en == lvl %}selected{% endif %}>{{ lvl }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="show-he-only he">
+          <div class="lang-block-title">🇮🇱 עברית</div>
+          <select id="level_he" name="level_he">
+            {% for lvl in levels_he %}
+              <option value="{{ lvl }}" {% if prefill and prefill.level_he == lvl %}selected{% endif %}>{{ lvl }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Card 5: Image ===== -->
+    <div class="card">
+      <span class="step-num">5</span>
+      <h2>🖼️ Hero Image (optional) <span class="he-label">· תמונה</span></h2>
+      <div class="image-row">
+        <div class="field">
+          <label for="image">{% if is_edit and existing_image %}Replace image{% else %}Upload image{% endif %}</label>
+          <input type="file" id="image" name="image" accept="image/png,image/jpeg,image/webp">
+          <div class="hint">PNG, JPG, or WebP. Auto-cropped to 16:9.{% if is_edit and existing_image %} Leave empty to keep current image.{% endif %}</div>
+          <img id="image-preview" alt="preview">
+          {% if is_edit and existing_image %}
+          <div class="existing-image-block">
+            <div class="label">Current image · התמונה הנוכחית</div>
+            <img class="existing-image-preview" src="{{ existing_image }}" alt="current">
+          </div>
+          {% endif %}
+        </div>
+        <div class="field">
+          <label for="img_position">Position</label>
+          <input type="text" id="img_position" name="img_position"
+                 list="position-options"
+                 value="{{ prefill.img_position if prefill else 'center center' }}">
+          <datalist id="position-options">
+            {% for p in position_presets %}<option value="{{ p }}">{% endfor %}
+            <option value="20% 35%">
+            <option value="50% 30%">
+          </datalist>
+          <div class="hint">e.g. <code>top center</code>, <code>50% 30%</code>.</div>
+        </div>
+        <div class="field">
+          <label for="img_zoom">Zoom (%)</label>
+          <input type="number" id="img_zoom" name="img_zoom"
+                 value="{{ (prefill.img_zoom|replace('%','')) if prefill else 100 }}"
+                 min="50" max="300" step="5">
+          <div class="hint">100 = none. 125 = zoom in. 80 = zoom out.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Card 6: Title ===== -->
+    <div class="card">
+      <span class="step-num">6</span>
+      <h2>📛 Title <span class="he-label">· כותרת המתכון</span></h2>
+      <div class="row bilingual">
+        <div class="show-en-only">
+          <div class="lang-block-title">🇬🇧 English</div>
+          <input type="text" id="title_en" name="title_en" placeholder="e.g. Arayes"
+                 value="{{ prefill.title_en if prefill else '' }}">
+        </div>
+        <div class="show-he-only he">
+          <div class="lang-block-title">🇮🇱 עברית</div>
+          <input type="text" id="title_he" name="title_he" placeholder="לדוגמה: עראייס"
+                 value="{{ prefill.title_he if prefill else '' }}">
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Card 7: Description ===== -->
+    <div class="card">
+      <span class="step-num">7</span>
+      <h2>✏️ Description <span class="he-label">· תיאור (1–2 משפטים)</span></h2>
+      <div class="row bilingual">
+        <div class="show-en-only">
+          <div class="lang-block-title">🇬🇧 English</div>
+          <textarea id="description_en" name="description_en" rows="3"
+                    placeholder="A short, appetizing description shown at the top of the recipe page.">{{ prefill.description_en if prefill else '' }}</textarea>
+        </div>
+        <div class="show-he-only he">
+          <div class="lang-block-title">🇮🇱 עברית</div>
+          <textarea id="description_he" name="description_he" rows="3"
+                    placeholder="תיאור קצר ומפתה שיוצג בראש העמוד.">{{ prefill.description_he if prefill else '' }}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Card 8: Ingredients ===== -->
+    <div class="card">
+      <span class="step-num">8</span>
+      <h2>🥕 Ingredients <span class="he-label">· מצרכים</span></h2>
+      <div class="hint" style="margin-bottom: 12px;">
+        <strong>Format:</strong> one ingredient per line. Lines ending with <code>:</code> become sub-headings (e.g. <code>For the dough:</code>). Use <code>**bold**</code> for emphasis.
+      </div>
+      <div class="row bilingual">
+        <div class="show-en-only">
+          <div class="lang-block-title">🇬🇧 English</div>
+          <textarea id="ingredients_en" name="ingredients_en" rows="11"
+                    placeholder="For the dough:&#10;3 cups flour&#10;1 tsp salt&#10;&#10;For the filling:&#10;200g cheese&#10;1 egg">{{ prefill.ingredients_en if prefill else '' }}</textarea>
+        </div>
+        <div class="show-he-only he">
+          <div class="lang-block-title">🇮🇱 עברית</div>
+          <textarea id="ingredients_he" name="ingredients_he" rows="11"
+                    placeholder="לבצק:&#10;3 כוסות קמח&#10;כפית מלח&#10;&#10;למילוי:&#10;200 גרם גבינה&#10;ביצה אחת">{{ prefill.ingredients_he if prefill else '' }}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Card 9: Instructions ===== -->
+    <div class="card">
+      <span class="step-num">9</span>
+      <h2>📝 Instructions <span class="he-label">· אופן ההכנה</span></h2>
+      <div class="hint" style="margin-bottom: 12px;">
+        <strong>Format:</strong> separate each step with a <strong>blank line</strong>. A step's first line ending with <code>:</code> becomes the step's bold sub-heading (e.g. <code>הכנת הקרם:</code>).
+      </div>
+      <div class="row bilingual">
+        <div class="show-en-only">
+          <div class="lang-block-title">🇬🇧 English</div>
+          <textarea id="instructions_en" name="instructions_en" rows="13"
+                    placeholder="Prepare the dough:&#10;Mix flour and water until smooth.&#10;&#10;Bake at 200°C for 20 minutes.">{{ prefill.instructions_en if prefill else '' }}</textarea>
+        </div>
+        <div class="show-he-only he">
+          <div class="lang-block-title">🇮🇱 עברית</div>
+          <textarea id="instructions_he" name="instructions_he" rows="13"
+                    placeholder="הכנת הבצק:&#10;מערבבים קמח ומים עד לקבלת תערובת חלקה.&#10;&#10;אופים בחום של 200°C במשך 20 דקות.">{{ prefill.instructions_he if prefill else '' }}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions-bar">
+      <a href="/cookbook/" target="_blank" class="btn-secondary">📖 View existing cookbook</a>
+      <button type="submit" class="btn{% if is_edit %} btn-update{% endif %}">
+        {% if is_edit %}💾 Update Recipe · עדכן מתכון{% else %}✨ Create Recipe · צור מתכון{% endif %}
+      </button>
+    </div>
+
+  </form>
+</div>
+
+<script>
+const form = document.getElementById("recipe-form");
+const INITIAL_LANG_MODE = "{{ prefill.lang_mode if prefill else 'both' }}";
+
+function applyLangMode(mode) {
+    form.classList.remove("mode-both", "mode-en", "mode-he");
+    form.classList.add("mode-" + mode);
+    const enFields = ["time_en", "level_en", "title_en", "description_en", "ingredients_en", "instructions_en"];
+    const heFields = ["time_he", "level_he", "title_he", "description_he", "ingredients_he", "instructions_he"];
+    const titleEnEl = document.getElementById("title_en");
+    const titleHeEl = document.getElementById("title_he");
+    if (mode === "en") {
+        heFields.forEach(id => document.getElementById(id)?.removeAttribute("required"));
+        titleEnEl.setAttribute("required", "");
+        titleHeEl.removeAttribute("required");
+    } else if (mode === "he") {
+        enFields.forEach(id => document.getElementById(id)?.removeAttribute("required"));
+        titleHeEl.setAttribute("required", "");
+        titleEnEl.removeAttribute("required");
+    } else {
+        titleEnEl.setAttribute("required", "");
+        titleHeEl.setAttribute("required", "");
+    }
+}
+document.querySelectorAll('input[name="lang_mode"]').forEach(input => {
+    input.addEventListener("change", e => applyLangMode(e.target.value));
+});
+applyLangMode(INITIAL_LANG_MODE);
+
+const imageInput = document.getElementById("image");
+const preview    = document.getElementById("image-preview");
+imageInput.addEventListener("change", () => {
+    const file = imageInput.files[0];
+    if (!file) { preview.style.display = "none"; return; }
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+});
+
+const titleEn = document.getElementById("title_en");
+const titleHe = document.getElementById("title_he");
+const fname   = document.getElementById("recipe_name");
+function autofillFromTitle(srcEl) {
+    if (fname.readOnly) return;
+    if (fname.value.trim()) return;
+    const cleaned = srcEl.value.trim().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_\-]/g, "");
+    if (cleaned) fname.value = cleaned;
+}
+titleEn.addEventListener("blur", () => autofillFromTitle(titleEn));
+titleHe.addEventListener("blur", () => autofillFromTitle(titleHe));
+
+form.addEventListener("submit", () => {
+    const btn = form.querySelector("button[type=submit]");
+    btn.disabled = true;
+    btn.textContent = "{% if is_edit %}⏳ Updating...{% else %}⏳ Creating...{% endif %}";
+});
+</script>
+
+</body>
+</html>
