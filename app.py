@@ -303,6 +303,15 @@ def _push_to_github_async(recipe_name: str) -> None:
 
 
 @app.route("/")
+def index_view():
+    """Public cookbook index — serves the generated Hebrew index page."""
+    idx = COOKBOOK_DIR / "index_he.html"
+    if not idx.exists():
+        generate_index.main()
+    return send_from_directory(str(COOKBOOK_DIR), "index_he.html")
+
+
+@app.route("/admin")
 @login_required
 def form_view():
     return render_template("form.html",

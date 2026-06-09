@@ -367,6 +367,32 @@ footer {{
   © 2020 Tomer Hillel · All rights reserved
 </footer>
 
+<!-- Floating edit button — links to the password-protected editor -->
+<a class="edit-fab" href="/admin" title="Edit recipes">✏️</a>
+<style>
+.edit-fab {{
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, #d35400 0%, #b94600 100%);
+    color: #fff;
+    font-size: 22px;
+    line-height: 52px;
+    text-align: center;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(211,84,0,0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+    z-index: 999;
+}}
+.edit-fab:hover {{
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(211,84,0,0.5);
+}}
+</style>
+
 </body>
 </html>
 """
