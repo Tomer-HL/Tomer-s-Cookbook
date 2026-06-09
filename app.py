@@ -535,6 +535,21 @@ def cookbook_files(subpath):
     return send_from_directory(str(COOKBOOK_DIR), subpath)
 
 
+@app.route("/<path:subpath>")
+def root_cookbook_files(subpath):
+    """Serve cookbook assets at root-relative paths.
+
+    index_he.html is sent from COOKBOOK_DIR at URL /, so its relative
+    hrefs (entrees/…, flag_gb.png, …) resolve to /<subpath>.  This route
+    forwards those requests to the same directory so images and recipe
+    pages work correctly.
+    """
+    full = COOKBOOK_DIR / subpath
+    if full.is_dir():
+        return send_from_directory(str(full), "index_en.html")
+    return send_from_directory(str(COOKBOOK_DIR), subpath)
+
+
 def _configure_git_credentials() -> None:
     """Set the git remote URL to include the GitHub token for HTTPS pushes.
     Reads GITHUB_TOKEN and GITHUB_REPO from environment variables.
