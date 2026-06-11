@@ -229,10 +229,11 @@ body {{
 .site-overline {{
     position: relative;
     font-family: {body_font};
-    font-size: 12px;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: #e0a84e;
+    font-size: {"18px" if is_he else "12px"};
+    font-weight: {"700" if is_he else "400"};
+    letter-spacing: {"0.02em" if is_he else "0.32em"};
+    text-transform: {"none" if is_he else "uppercase"};
+    color: #e8b25a;
     margin-bottom: 10px;
 }}
 .site-title {{
@@ -248,10 +249,10 @@ body {{
 }}
 .site-subtitle {{
     margin-top: 12px;
-    font-size: clamp(13px, 2vw, 16px);
-    color: rgba(255,255,255,0.62);
+    font-size: {"clamp(16px, 2.6vw, 20px)" if is_he else "clamp(13px, 2vw, 16px)"};
+    color: rgba(255,255,255,{"0.78" if is_he else "0.62"});
     position: relative;
-    font-style: italic;
+    font-style: {"normal" if is_he else "italic"};
 }}
 .header-divider {{
     display: flex;
@@ -426,7 +427,7 @@ footer {{
 </main>
 
 <footer>
-  © 2020 Tomer Hillel · All rights reserved
+  © 2020 Tomer Hillel Lev · All rights reserved
 </footer>
 
 <!-- Floating edit button — links to the password-protected editor -->
