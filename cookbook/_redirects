@@ -1,0 +1,6 @@
+# Homepage -> Hebrew index
+/                /index_he.html   200
+
+# Generated pages use absolute /cookbook/... links (needed by the Flask app).
+# cookbook/ is the web root here, so strip the prefix.
+/cookbook/*      /:splat          200
