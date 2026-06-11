@@ -10,3 +10,8 @@
 !/templates/
 !/flag_gb.png
 !/flag_il.png
+
+# Windows "downloaded from web" metadata (alternate data streams).
+# Never commit these — the colon in the name is invalid on Windows.
+*Zone.Identifier
+*:Zone.Identifier
