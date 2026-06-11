@@ -125,6 +125,8 @@ def build_index(lang: str) -> str:
         meta      = CATEGORY_META[cat]
         cat_label = meta["he"] if is_he else meta["en"]
         icon      = meta["icon"]
+        count     = len(recipes)
+        count_lbl = f"{count} מתכונים" if is_he else f"{count} recipe{'s' if count != 1 else ''}"
 
         cards = ""
         for r in recipes:
@@ -135,7 +137,7 @@ def build_index(lang: str) -> str:
             )
             cards += f"""
             <a class="card" href="{r['html']}">
-              <div class="card-img">{img_tag}</div>
+              <div class="card-img">{img_tag}<span class="card-chip">{icon} {cat_label}</span></div>
               <div class="card-body">
                 <span class="card-title">{r['title']}</span>
               </div>
@@ -143,7 +145,7 @@ def build_index(lang: str) -> str:
 
         sections_html += f"""
         <section class="category">
-          <h2 class="cat-title"><span class="cat-icon">{icon}</span> {cat_label}</h2>
+          <h2 class="cat-title"><span class="cat-chip">{icon}</span> {cat_label}<span class="cat-count">{count_lbl}</span></h2>
           <div class="cards">{cards}
           </div>
         </section>"""
@@ -165,11 +167,12 @@ def build_index(lang: str) -> str:
 :root {{
     --orange: #d35400;
     --orange-light: #f39c12;
+    --gold: #c8923d;
     --bg: #fdf8f0;
     --card-bg: #ffffff;
-    --border: #f0e0d0;
+    --border: #efe2d2;
     --text: #2c1a0e;
-    --muted: #7a6a5a;
+    --muted: #8a7561;
 }}
 
 * {{ box-sizing: border-box; margin: 0; padding: 0; }}
@@ -187,7 +190,8 @@ body {{
 /* ---- Header ---- */
 .site-header {{
     background: linear-gradient(135deg, #2c1a0e 0%, #5a3010 100%);
-    padding: 48px 24px 40px;
+    border-top: 3px solid var(--gold);
+    padding: 44px 24px 38px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -222,31 +226,52 @@ body {{
 .lang-switch:hover {{ background: rgba(255,255,255,0.2); color: #fff; }}
 .lang-switch img {{ width: 20px; height: 14px; border-radius: 2px; }}
 
+.site-overline {{
+    position: relative;
+    font-family: {body_font};
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #e0a84e;
+    margin-bottom: 10px;
+}}
 .site-title {{
     font-family: {font};
-    font-size: clamp(28px, 5vw, 52px);
+    font-size: clamp(30px, 5vw, 50px);
     color: #fff;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     position: relative;
-    line-height: 1.15;
+    line-height: 1.12;
 }}
 .title-accent {{
     color: var(--orange-light);
 }}
 .site-subtitle {{
-    margin-top: 10px;
+    margin-top: 12px;
     font-size: clamp(13px, 2vw, 16px);
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.62);
     position: relative;
     font-style: italic;
 }}
 .header-divider {{
-    width: 60px;
-    height: 3px;
-    background: var(--orange-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
     margin: 18px auto 0;
-    border-radius: 2px;
     position: relative;
+}}
+.header-divider .line {{
+    width: 34px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+}}
+.header-divider .diamond {{
+    width: 7px;
+    height: 7px;
+    background: var(--orange-light);
+    transform: rotate(45deg);
 }}
 
 /* ---- Main ---- */
@@ -258,45 +283,63 @@ main {{
 
 /* ---- Category sections ---- */
 .category {{
-    margin-bottom: 52px;
+    margin-bottom: 50px;
 }}
 .cat-title {{
     font-family: {font};
-    font-size: 22px;
+    font-size: 23px;
+    font-weight: 600;
     color: var(--orange);
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 11px;
     border-bottom: 2px solid var(--border);
-    padding-bottom: 10px;
+    padding-bottom: 11px;
 }}
-.cat-icon {{ font-size: 26px; }}
+.cat-chip {{
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: #fbeede;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    flex-shrink: 0;
+}}
+.cat-count {{
+    font-size: 13px;
+    font-weight: 600;
+    color: #a08a74;
+    {"margin-right" if is_he else "margin-left"}: 4px;
+}}
 
 /* ---- Cards grid ---- */
 .cards {{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-    gap: 20px;
+    gap: 22px;
 }}
 .card {{
     background: var(--card-bg);
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
     text-decoration: none;
     color: var(--text);
-    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+    box-shadow: 0 2px 10px rgba(120,70,20,0.06);
     border: 1px solid var(--border);
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
 }}
 .card:hover {{
-    transform: translateY(-4px);
-    box-shadow: 0 10px 28px rgba(211,84,0,0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 14px 30px rgba(211,84,0,0.16);
 }}
 .card-img {{
     height: 155px;
+    position: relative;
     overflow: hidden;
     background: #f5ebe0;
 }}
@@ -304,10 +347,22 @@ main {{
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.35s ease;
+    transition: transform 0.4s ease;
 }}
 .card:hover .card-img img {{
-    transform: scale(1.05);
+    transform: scale(1.06);
+}}
+.card-chip {{
+    position: absolute;
+    top: 10px;
+    {"right" if is_he else "left"}: 10px;
+    background: rgba(255,255,255,0.92);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #a9521a;
+    padding: 4px 10px;
+    border-radius: 20px;
 }}
 .no-img {{
     width: 100%;
@@ -320,16 +375,21 @@ main {{
     background: linear-gradient(135deg, #f5ebe0, #fdf3e8);
 }}
 .card-body {{
-    padding: 14px 16px 16px;
+    padding: 14px 16px 17px;
     flex: 1;
     display: flex;
     align-items: center;
 }}
 .card-title {{
-    font-size: 15px;
+    font-family: {font};
+    font-size: 18px;
     font-weight: 600;
     color: var(--text);
-    line-height: 1.35;
+    line-height: 1.25;
+    transition: color 0.2s;
+}}
+.card:hover .card-title {{
+    color: var(--orange);
 }}
 
 /* ---- Footer ---- */
@@ -342,8 +402,9 @@ footer {{
 }}
 
 @media (max-width: 480px) {{
-    .cards {{ grid-template-columns: repeat(2, 1fr); gap: 12px; }}
-    .card-img {{ height: 120px; }}
+    .cards {{ grid-template-columns: repeat(2, 1fr); gap: 14px; }}
+    .card-img {{ height: 124px; }}
+    .card-title {{ font-size: 16px; }}
 }}
 </style>
 </head>
@@ -351,12 +412,13 @@ footer {{
 
 <header class="site-header">
   <a class="lang-switch" href="{other}">{switch}</a>
+  <p class="site-overline">{'מהמטבח הביתי הישראלי' if is_he else 'Israeli home cooking'}</p>
   <h1 class="site-title">
     {'<span class="title-accent">ספר המתכונים</span><br>הישראלי של תומר' if is_he else
      'Tomer\'s <span class="title-accent">Israeli</span> Cookbook'}
   </h1>
   <p class="site-subtitle">{subtitle}</p>
-  <div class="header-divider"></div>
+  <div class="header-divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
 </header>
 
 <main>
