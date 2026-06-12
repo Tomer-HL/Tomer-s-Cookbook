@@ -431,7 +431,7 @@ footer {{
 </footer>
 
 <!-- Floating edit button — links to the password-protected editor -->
-<a class="edit-fab" href="/admin" title="Edit recipes">✏️</a>
+<a class="edit-fab" href="https://tomer-s-cookbook.onrender.com/admin" title="Edit recipes">✏️</a>
 <style>
 .edit-fab {{
     position: fixed;
