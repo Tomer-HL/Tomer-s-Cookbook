@@ -16,6 +16,7 @@ except ImportError:
 HERO_HEIGHT_PX    = 260
 HERO_RATIO        = 836 / HERO_HEIGHT_PX     # ≈ 3.215 : 1
 HERO_TARGET_WIDTH = 1600                     # שדרוג/הקטנה אחידים לרוחב פיקסלי
+HERO_BG_COLOR     = (245, 238, 228)        # #f5eee4 — sides of the banner when zoomed out
 
 # ============================================================
 #  ⚙️  הגדרות המתכון — שנה רק כאן
@@ -119,56 +120,114 @@ def _parse_position_anchors(position: str) -> tuple[float, float]:
     return h, v
 
 
+ORIGINAL_SUFFIX = "_original"   # the full uploaded photo is kept as <name>_original.<ext>
+ORIGINAL_MAX_SIDE = 2400        # originals are shrunk to this size to keep the repo light
+
+
+def original_image_path(dst: Path) -> Path:
+    """Where the full, uncropped photo for this hero image is kept."""
+    return dst.with_name(f"{dst.stem}{ORIGINAL_SUFFIX}{dst.suffix}")
+
+
+def _crop_to_ratio(img, ratio: float, h_anchor: float, v_anchor: float):
+    w, h = img.size
+    current = w / h
+    if abs(current - ratio) < 0.005:
+        return img
+    if current > ratio:                      # too wide — trim left/right
+        new_w = int(round(h * ratio))
+        left = int(round((w - new_w) * h_anchor))
+        return img.crop((left, 0, left + new_w, h))
+    new_h = int(round(w / ratio))            # too tall — trim top/bottom
+    top = int(round((h - new_h) * v_anchor))
+    return img.crop((0, top, w, top + new_h))
+
+
+def _save_image(img, dst: Path) -> None:
+    ext = dst.suffix.lower()
+    if ext in (".jpg", ".jpeg"):
+        if img.mode != "RGB":
+            img = img.convert("RGB")
+        img.save(dst, quality=88, optimize=True)
+    elif ext == ".webp":
+        img.save(dst, quality=88, method=6)
+    else:  # .png
+        img.save(dst, optimize=True)
+
+
+def _zoom_value(zoom) -> float:
+    try:
+        return float(str(zoom).strip().rstrip("%")) / 100
+    except ValueError:
+        return 1.0
+
+
 def process_hero_image(src: Path, dst: Path, position: str = "center center",
-                        target_ratio: float = HERO_RATIO) -> bool:
-    """חותך את התמונה ליחס היעד (ברירת מחדל 16:9) לפי ה-Position שנבחר.
-    מחזיר True אם התמונה עובדה בהצלחה, False אם Pillow לא מותקן (אז העתקה ישירה)."""
+                       target_ratio: float = HERO_RATIO, zoom: str = "100%") -> bool:
+    """Build the banner image `dst` from a photo.
+
+    The full photo is kept next to it as <name>_original.<ext>, so the banner can
+    be rebuilt later with a different Position/Zoom.  A photo coming from outside
+    the recipe folder is treated as a new upload and becomes the new original.
+
+    Zoom below 100% shows more of the photo: the banner gets the wider view in
+    the middle and the sides are filled with the banner's background colour.  Zoom of 100% or
+    more is handled by CSS on top of a normal crop.
+    Returns True if processed, False if Pillow is missing (plain copy).
+    """
+    original = original_image_path(dst)
+    if src.resolve().parent != dst.resolve().parent:
+        # New photo → keep it (shrunk if huge) as the original.
+        if _HAS_PIL:
+            from PIL import ImageOps
+            img = Image.open(src)
+            try:
+                img = ImageOps.exif_transpose(img)
+            except Exception:
+                pass
+            img.thumbnail((ORIGINAL_MAX_SIDE, ORIGINAL_MAX_SIDE), Image.LANCZOS)
+            _save_image(img, original)
+        else:
+            original.write_bytes(src.read_bytes())
+        src = original
+    elif original.exists():
+        src = original
+
     if not _HAS_PIL:
         if src.resolve() != dst.resolve():
             dst.write_bytes(src.read_bytes())
         return False
 
+    from PIL import ImageOps
     img = Image.open(src)
-    # שמירת EXIF orientation (תמונות מהטלפון לעיתים מסובבות)
     try:
-        from PIL import ImageOps
         img = ImageOps.exif_transpose(img)
     except Exception:
         pass
+    if img.mode not in ("RGB", "RGBA"):
+        img = img.convert("RGB")
 
-    w, h = img.size
-    current_ratio = w / h
     h_anchor, v_anchor = _parse_position_anchors(position)
+    z = _zoom_value(zoom)
+    out_w = HERO_TARGET_WIDTH
+    out_h = int(round(out_w / target_ratio))
 
-    # חיתוך ליחס היעד
-    if abs(current_ratio - target_ratio) < 0.005:
-        cropped = img                                    # כבר ביחס הנכון
-    elif current_ratio > target_ratio:
-        # תמונה רחבה מדי — חיתוך משמאל/ימין
-        new_w = int(round(h * target_ratio))
-        left  = int(round((w - new_w) * h_anchor))
-        cropped = img.crop((left, 0, left + new_w, h))
+    if z >= 0.995:
+        banner = _crop_to_ratio(img, target_ratio, h_anchor, v_anchor)
+        banner = banner.resize((out_w, out_h), Image.LANCZOS)
     else:
-        # תמונה גבוהה מדי — חיתוך מלמעלה/מלמטה
-        new_h = int(round(w / target_ratio))
-        top   = int(round((h - new_h) * v_anchor))
-        cropped = img.crop((0, top, w, top + new_h))
+        z = max(z, 0.2)
+        # Background: plain colour matching the banner box on the page.
+        bg = Image.new("RGB", (out_w, out_h), HERO_BG_COLOR)
+        # Foreground: a taller slice of the photo (more of it visible).
+        fg = _crop_to_ratio(img, target_ratio * z, h_anchor, v_anchor)
+        fg_w = max(1, int(round(out_h * fg.width / fg.height)))
+        fg = fg.resize((min(fg_w, out_w), out_h), Image.LANCZOS).convert("RGB")
+        left = int(round((out_w - fg.width) * h_anchor))
+        bg.paste(fg, (left, 0))
+        banner = bg
 
-    # הקטנה אם התמונה גדולה מהרוחב היעד (חוסך משקל בדפדפן)
-    if cropped.size[0] > HERO_TARGET_WIDTH:
-        new_h = int(round(HERO_TARGET_WIDTH / target_ratio))
-        cropped = cropped.resize((HERO_TARGET_WIDTH, new_h), Image.LANCZOS)
-
-    # שמירה בפורמט המקורי
-    ext = dst.suffix.lower()
-    if ext in (".jpg", ".jpeg"):
-        if cropped.mode != "RGB":
-            cropped = cropped.convert("RGB")
-        cropped.save(dst, quality=88, optimize=True)
-    elif ext == ".webp":
-        cropped.save(dst, quality=88, method=6)
-    else:  # .png או אחר
-        cropped.save(dst, optimize=True)
+    _save_image(banner, dst)
     return True
 
 
@@ -436,7 +495,7 @@ def build_html(
     # היא נחתכה ליחס 16:9 לפי Position. לכן כאן צריך רק cover פשוט.
     # Zoom נשאר פעיל כ-CSS transform לזום משני (מעל החיתוך).
     zoom_val    = float(img_zoom.rstrip("%"))
-    scale_ratio = zoom_val / 100
+    scale_ratio = max(zoom_val, 100) / 100   # zoom-out is built into the image itself
     hero_tag = (
         f'''<div class="hero-wrapper">'''
         f'''<div class="hero" role="img" aria-label="{title}" '''
@@ -733,7 +792,7 @@ def main() -> None:
     if src_image:
         # שני ה-TXT חולקים אותה תמונה — ניקח את ה-Position מה-en כמקור אמת
         dest_image = out_dir / src_image.name
-        processed  = process_hero_image(src_image, dest_image, position=pos_en)
+        processed  = process_hero_image(src_image, dest_image, position=pos_en, zoom=zoom_en)
         image_file = src_image.name
         if processed:
             print(f"🖼️   Hero image processed → {HERO_RATIO:.2f}:1 ({pos_en}).")

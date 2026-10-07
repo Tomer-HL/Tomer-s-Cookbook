@@ -197,7 +197,7 @@ def _generate_single_language(*, lang, recipe_name, category,
     src_img = _save_uploaded_image(image_storage, recipe_name)
     if src_img:
         dst_img = out_dir / src_img.name
-        generate_recipe.process_hero_image(src_img, dst_img, position=pos)
+        generate_recipe.process_hero_image(src_img, dst_img, position=pos, zoom=zoom)
         image_filename = src_img.name
         if src_img.exists() and src_img.resolve() != dst_img.resolve():
             src_img.unlink()
@@ -205,6 +205,9 @@ def _generate_single_language(*, lang, recipe_name, category,
         for ext in ALLOWED_IMAGE_EXTS:
             candidate = out_dir / f"{recipe_name}{ext}"
             if candidate.exists():
+                # Rebuild with the current Position/Zoom from the kept original.
+                generate_recipe.process_hero_image(candidate, candidate,
+                                                   position=pos, zoom=zoom)
                 image_filename = candidate.name; break
 
     html = generate_recipe.build_html(
@@ -505,6 +508,7 @@ def create_view():
             if new_ext in ALLOWED_IMAGE_EXTS:
                 for ext in ALLOWED_IMAGE_EXTS:
                     for old_img in (out_dir / f"{recipe_name}{ext}",
+                                    out_dir / f"{recipe_name}_original{ext}",
                                     PROJECT_ROOT / f"{recipe_name}{ext}"):
                         if old_img.exists():
                             old_img.unlink()
@@ -519,14 +523,9 @@ def create_view():
                            instructions=inst_he, img_position=img_position,
                            img_zoom=img_zoom, lang="he"), encoding="utf-8")
 
-            new_img = _save_uploaded_image(image_storage, recipe_name)
-            if not new_img:
-                # Reuse existing image from recipe folder if no new upload
-                for ext in ALLOWED_IMAGE_EXTS:
-                    existing = out_dir / f"{recipe_name}{ext}"
-                    if existing.exists():
-                        shutil.copy2(existing, PROJECT_ROOT / f"{recipe_name}{ext}")
-                        break
+            # A new upload goes to the project root; without one, the generator
+            # rebuilds the banner from the photo kept in the recipe folder.
+            _save_uploaded_image(image_storage, recipe_name)
 
             generate_recipe.RECIPE_NAME = recipe_name
             generate_recipe.CATEGORY    = category
