@@ -96,6 +96,14 @@ h1 { color: var(--orange); font-size: 28px; margin-bottom: 8px; }
     background: #fffaf0; border-radius: 8px;
     padding: 8px 12px; word-break: break-all; font-family: monospace;
 }
+.sync {
+    margin: 0 0 18px; padding: 12px 14px; border-radius: 10px;
+    font-size: 14px; line-height: 1.5; text-align: left;
+}
+.sync.ok   { background: #eafaf1; border: 1px solid #a9dfbf; color: #1e7e46; }
+.sync.fail { background: #fdecea; border: 1px solid #f5b7b1; color: #a93226; }
+.sync .he  { font-family: 'Alef', system-ui, sans-serif; direction: rtl; text-align: right; display: block; margin-top: 4px; }
+.sync code { font-size: 12px; word-break: break-word; }
 </style>
 </head>
 <body>
@@ -103,6 +111,18 @@ h1 { color: var(--orange); font-size: 28px; margin-bottom: 8px; }
     <div class="checkmark">✓</div>
     <h1>Recipe Saved!</h1>
     <p class="subtitle">המתכון נשמר בהצלחה. ה-index עודכן אוטומטית.</p>
+
+    {% if sync_status == 'pushed' %}
+      <div class="sync ok">✅ Saved to GitHub. The public site will update in a minute or two.
+        <span class="he">נשמר ב-GitHub. האתר הציבורי יתעדכן תוך דקה-שתיים.</span></div>
+    {% elif sync_status == 'unchanged' %}
+      <div class="sync ok">ℹ️ No changes compared to GitHub — nothing new to save.
+        <span class="he">אין שינויים לעומת GitHub.</span></div>
+    {% elif sync_status == 'failed' %}
+      <div class="sync fail">⚠️ <strong>NOT saved to GitHub.</strong> This change will be lost when the server restarts.
+        <span class="he">השינוי <strong>לא</strong> נשמר ב-GitHub ויאבד כשהשרת יופעל מחדש.</span>
+        <code>{{ sync_error }}</code></div>
+    {% endif %}
 
     {% if lang_mode == 'both' %}
       <span class="lang-tag">🇬🇧 + 🇮🇱  Bilingual</span>

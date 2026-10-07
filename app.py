@@ -5,7 +5,9 @@ app.py — Flask UI for "Tomer's Israeli Cookbook" with edit support
 """
 from __future__ import annotations
 
+import base64
 import functools
+import hashlib
 import json
 import os
 import re
@@ -13,6 +15,8 @@ import shutil
 import subprocess
 import sys
 import threading
+import urllib.error
+import urllib.request
 import webbrowser
 from datetime import datetime
 from pathlib import Path
@@ -240,66 +244,119 @@ def _existing_recipes():
 
 
 # ============================================================
-#  Auto-push to GitHub after every save
+#  Save to GitHub after every save (via the GitHub REST API)
 # ============================================================
+# Render's disk is temporary, so GitHub is the permanent copy of the recipes.
+# We commit straight through the GitHub API instead of running `git` on the
+# server, so it doesn't depend on how Render checks out the repository.
+GITHUB_API = "https://api.github.com"
+
+
+class GitHubSyncError(Exception):
+    """Raised when saving to GitHub fails. The message is shown to the user."""
+
+
 def _git(*args, timeout=60):
-    """Run a git command in the project directory. Returns CompletedProcess."""
+    """Run a git command in the project directory (used only for the startup pull)."""
     return subprocess.run(
-        ["git", *args],
-        cwd=str(PROJECT_ROOT),
-        capture_output=True,
-        text=True,
-        timeout=timeout,
+        ["git", *args], cwd=str(PROJECT_ROOT),
+        capture_output=True, text=True, timeout=timeout,
     )
 
 
-def _push_to_github(recipe_name: str) -> None:
-    """Stage, commit, and push changes to GitHub. Logs to stdout.
-
-    Designed to be safe to call from a background thread - never raises.
-    Failures are printed to the terminal but don't block the user.
-    """
+def _github_api(method: str, path: str, body: dict | None = None) -> dict:
+    token = os.environ.get("GITHUB_TOKEN", "")
+    repo = os.environ.get("GITHUB_REPO", "")
+    req = urllib.request.Request(
+        f"{GITHUB_API}/repos/{repo}{path}",
+        method=method,
+        data=json.dumps(body).encode("utf-8") if body is not None else None,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+            "Content-Type": "application/json",
+            "User-Agent": "tomers-cookbook-editor",
+        },
+    )
     try:
-        # Stage all changes (cookbook/, *.txt, *.png, etc.)
-        add = _git("add", ".")
-        if add.returncode != 0:
-            print(f"[GIT] add failed: {add.stderr.strip()}")
-            return
-
-        # Anything to commit?
-        diff = _git("diff", "--cached", "--quiet")
-        if diff.returncode == 0:
-            print("[GIT] No changes to commit.")
-            return
-
-        # Commit
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
-        msg = f"Update recipe: {recipe_name} - {timestamp}"
-        commit = _git("commit", "-m", msg)
-        if commit.returncode != 0:
-            print(f"[GIT] commit failed: {commit.stderr.strip()}")
-            return
-        print(f"[GIT] Committed: {msg}")
-
-        # Push
-        push = _git("push", "origin", "main", timeout=120)
-        if push.returncode != 0:
-            print(f"[GIT] push failed: {push.stderr.strip()}")
-            return
-        print("[GIT] Pushed to GitHub successfully. "
-              "Site will refresh on GitHub Pages within ~30s.")
-
-    except subprocess.TimeoutExpired:
-        print("[GIT] Operation timed out.")
-    except Exception as exc:
-        print(f"[GIT] Unexpected error: {exc}")
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            raw = resp.read()
+            return json.loads(raw) if raw else {}
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")
+        try:
+            detail = json.loads(detail).get("message", detail)
+        except ValueError:
+            pass
+        hint = ""
+        if exc.code == 401:
+            hint = " (the GITHUB_TOKEN on Render is wrong or expired)"
+        elif exc.code in (403, 404):
+            hint = (" (check that the token has access to this repo with "
+                    "Contents: Read and write, and that GITHUB_REPO is correct)")
+        raise GitHubSyncError(f"GitHub said {exc.code}: {detail}{hint}") from None
+    except urllib.error.URLError as exc:
+        raise GitHubSyncError(f"Could not reach GitHub: {exc.reason}") from None
 
 
-def _push_to_github_async(recipe_name: str) -> None:
-    """Run _push_to_github in a background thread so the user doesn't wait."""
-    threading.Thread(
-        target=_push_to_github, args=(recipe_name,), daemon=True
-    ).start()
+def _blob_sha(data: bytes) -> str:
+    """The SHA git would give this file's contents (to skip unchanged files)."""
+    return hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest()
+
+
+def sync_to_github(targets: list[str], message: str) -> str:
+    """Make GitHub match the local copies of `targets` in a single commit.
+
+    `targets` are repo-relative folders or files. Folders are mirrored: files
+    that no longer exist locally are deleted on GitHub too.
+    Returns "pushed" or "unchanged". Raises GitHubSyncError on failure.
+    """
+    if not os.environ.get("GITHUB_TOKEN") or not os.environ.get("GITHUB_REPO"):
+        raise GitHubSyncError("GITHUB_TOKEN or GITHUB_REPO is not set on the server.")
+    branch = os.environ.get("GITHUB_BRANCH", "main")
+
+    head_sha = _github_api("GET", f"/git/ref/heads/{branch}")["object"]["sha"]
+    base_tree = _github_api("GET", f"/git/commits/{head_sha}")["tree"]["sha"]
+    tree = _github_api("GET", f"/git/trees/{base_tree}?recursive=1")
+    remote = {e["path"]: e["sha"] for e in tree.get("tree", []) if e["type"] == "blob"}
+
+    local: dict[str, Path] = {}
+    folder_prefixes: list[str] = []
+    for rel in targets:
+        path = PROJECT_ROOT / rel
+        if path.is_dir():
+            folder_prefixes.append(rel.rstrip("/") + "/")
+            for f in path.rglob("*"):
+                if f.is_file() and "Zone.Identifier" not in f.name:
+                    local[f.relative_to(PROJECT_ROOT).as_posix()] = f
+        elif path.is_file():
+            local[rel] = path
+
+    changes = []
+    for repo_path, f in sorted(local.items()):
+        data = f.read_bytes()
+        if remote.get(repo_path) == _blob_sha(data):
+            continue
+        blob = _github_api("POST", "/git/blobs", {
+            "content": base64.b64encode(data).decode("ascii"), "encoding": "base64"})
+        changes.append({"path": repo_path, "mode": "100644", "type": "blob",
+                        "sha": blob["sha"]})
+    for repo_path in remote:
+        if repo_path not in local and any(repo_path.startswith(p) for p in folder_prefixes):
+            changes.append({"path": repo_path, "mode": "100644", "type": "blob", "sha": None})
+
+    if not changes:
+        return "unchanged"
+
+    new_tree = _github_api("POST", "/git/trees", {"base_tree": base_tree, "tree": changes})
+    commit_body = {"message": message, "tree": new_tree["sha"], "parents": [head_sha]}
+    if os.environ.get("GIT_NAME") and os.environ.get("GIT_EMAIL"):
+        commit_body["author"] = {"name": os.environ["GIT_NAME"],
+                                 "email": os.environ["GIT_EMAIL"]}
+    new_commit = _github_api("POST", "/git/commits", commit_body)
+    _github_api("PATCH", f"/git/refs/heads/{branch}", {"sha": new_commit["sha"]})
+    return "pushed"
 
 
 @app.route("/")
@@ -505,9 +562,20 @@ def create_view():
     except Exception as exc:
         return render_template("error.html", message=str(exc)), 500
 
-    # Push to GitHub in the background so the user gets a fast redirect.
-    # Errors are logged to the terminal but never block the save.
-    _push_to_github_async(recipe_name)
+    # Save to GitHub (the permanent copy) and tell the user if it failed.
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+    try:
+        status = sync_to_github(
+            [f"cookbook/{category}/{recipe_name}",
+             "cookbook/index_en.html", "cookbook/index_he.html"],
+            f"Update recipe: {recipe_name} - {timestamp}")
+        session["sync_status"] = status
+        session.pop("sync_error", None)
+        print(f"[GITHUB] {recipe_name}: {status}")
+    except Exception as exc:  # never lose the local save because of this
+        session["sync_status"] = "failed"
+        session["sync_error"] = str(exc)
+        print(f"[GITHUB] Save to GitHub FAILED for {recipe_name}: {exc}")
 
     return redirect(url_for("success_view",
         category=category, recipe=recipe_name, lang_mode=lang_mode))
@@ -519,7 +587,9 @@ def success_view(category, recipe):
     lang_mode = request.args.get("lang_mode", "both")
     if lang_mode not in LANG_MODES: lang_mode = "both"
     return render_template("success.html",
-        category=category, recipe=recipe, lang_mode=lang_mode)
+        category=category, recipe=recipe, lang_mode=lang_mode,
+        sync_status=session.pop("sync_status", None),
+        sync_error=session.pop("sync_error", None))
 
 
 @app.route("/cookbook/")
