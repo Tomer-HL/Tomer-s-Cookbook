@@ -1,7 +1,7 @@
 Arayes (Meat-Stuffed Pita)
 
 Position: center center
-Zoom: 100%
+Zoom: 50%
 
 Description
 Arayes is a classic dish that’s incredibly easy to make at home. Originating in Lebanon and Syria, it was brought to Israel by Jewish communities from across the Arab world. Today, it stands as one of Israel's most iconic street foods—crispy on the outside, juicy on the inside, and perfect straight off the grill with a side of tahini.
