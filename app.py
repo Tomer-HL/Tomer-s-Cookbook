@@ -497,6 +497,18 @@ def create_view():
     out_dir = COOKBOOK_DIR / category / recipe_name
 
     try:
+        # A newly uploaded photo replaces the old one, even if its format differs
+        # (e.g. new .jpg vs old .png). Otherwise the old file is found first and
+        # the new upload is silently thrown away.
+        if image_storage and image_storage.filename:
+            new_ext = Path(image_storage.filename).suffix.lower()
+            if new_ext in ALLOWED_IMAGE_EXTS:
+                for ext in ALLOWED_IMAGE_EXTS:
+                    for old_img in (out_dir / f"{recipe_name}{ext}",
+                                    PROJECT_ROOT / f"{recipe_name}{ext}"):
+                        if old_img.exists():
+                            old_img.unlink()
+
         if lang_mode == "both":
             (PROJECT_ROOT / f"{recipe_name}_en.txt").write_text(
                 _build_txt(title=title_en, description=desc_en, ingredients=ing_en,
