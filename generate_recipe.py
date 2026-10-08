@@ -16,7 +16,7 @@ except ImportError:
 HERO_HEIGHT_PX    = 260
 HERO_RATIO        = 836 / HERO_HEIGHT_PX     # ≈ 3.215 : 1
 HERO_TARGET_WIDTH = 1600                     # שדרוג/הקטנה אחידים לרוחב פיקסלי
-HERO_BG_COLOR     = (245, 238, 228)        # #f5eee4 — sides of the banner when zoomed out
+MIN_HERO_ZOOM     = 0.3                      # smallest zoom-out (frame gets up to ~3.3x taller)
 
 # ============================================================
 #  ⚙️  הגדרות המתכון — שנה רק כאן
@@ -210,22 +210,15 @@ def process_hero_image(src: Path, dst: Path, position: str = "center center",
     h_anchor, v_anchor = _parse_position_anchors(position)
     z = _zoom_value(zoom)
     out_w = HERO_TARGET_WIDTH
-    out_h = int(round(out_w / target_ratio))
 
-    if z >= 0.995:
-        banner = _crop_to_ratio(img, target_ratio, h_anchor, v_anchor)
-        banner = banner.resize((out_w, out_h), Image.LANCZOS)
-    else:
-        z = max(z, 0.2)
-        # Background: plain colour matching the banner box on the page.
-        bg = Image.new("RGB", (out_w, out_h), HERO_BG_COLOR)
-        # Foreground: a taller slice of the photo (more of it visible).
-        fg = _crop_to_ratio(img, target_ratio * z, h_anchor, v_anchor)
-        fg_w = max(1, int(round(out_h * fg.width / fg.height)))
-        fg = fg.resize((min(fg_w, out_w), out_h), Image.LANCZOS).convert("RGB")
-        left = int(round((out_w - fg.width) * h_anchor))
-        bg.paste(fg, (left, 0))
-        banner = bg
+    # Zoom below 100% shows more of the photo: the banner keeps the full width
+    # and gets taller (the page makes the frame taller to match), so the photo
+    # always fills the whole frame.  Zoom of 100%+ is done by CSS on top.
+    z = min(max(z, MIN_HERO_ZOOM), 1.0)
+    ratio = target_ratio * z
+    banner = _crop_to_ratio(img, ratio, h_anchor, v_anchor)
+    if banner.width > out_w:                 # shrink big photos (never enlarge)
+        banner = banner.resize((out_w, int(round(out_w / ratio))), Image.LANCZOS)
 
     _save_image(banner, dst)
     return True
@@ -496,8 +489,12 @@ def build_html(
     # Zoom נשאר פעיל כ-CSS transform לזום משני (מעל החיתוך).
     zoom_val    = float(img_zoom.rstrip("%"))
     scale_ratio = max(zoom_val, 100) / 100   # zoom-out is built into the image itself
+    # Zoomed out → taller frame, so the (taller) photo fills it completely.
+    frame_zoom  = min(max(zoom_val / 100, MIN_HERO_ZOOM), 1.0)
+    frame_style = (f' style="height: {round(HERO_HEIGHT_PX / frame_zoom)}px;"'
+                   if frame_zoom < 0.995 else "")
     hero_tag = (
-        f'''<div class="hero-wrapper">'''
+        f'''<div class="hero-wrapper"{frame_style}>'''
         f'''<div class="hero" role="img" aria-label="{title}" '''
         f'''style="background-image: url('{hero_image}'); '''
         f'''background-position: {img_position}; '''
