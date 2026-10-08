@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Israeli Chocolate Balls – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-left: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    left: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-left: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-left: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+/* תווית מובילה inline בתוך שורה (כמו "Tip:" ב-"Tip: Freeze portions...") */
+.inline-label {
+    color: var(--orange);
+    font-weight: 700;
+}
+</style>
+</head>
+<body>
+  <h1>Israeli Chocolate Balls</h1>
+  <p>Chocolate balls are as iconic as falafel in Israel—at least for kids. Known as *kadorei shokolad* (כדורי שוקולד) in Hebrew, these simple treats are a quintessential part of Israeli childhood. They’re incredibly easy to make and are a perfect recipe to prepare together with the kids.</p>
+  <button class="print-button" onclick="window.print()">🖨️ Print</button>
+  <div class="section-box">
+    <h2>Ingredients</h2>
+    <ul><li>8.5 oz (240 g) tea biscuits / Petit Beurre biscuits</li><li>4 oz (115 g) unsalted butter or margarine, melted</li><li>8 tbsp sugar</li><li>5 tbsp cocoa powder</li><li>¼ cup (60 ml) milk or soy milk (for a pareve version)</li><li>1 tbsp vanilla extract</li><li><strong>Optional for coating:</strong> 3.5 oz (100 g) dark chocolate, melted/Coconut flakes/sprinkles, or crushed biscuits.</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>Instructions</h2>
+    <ol><li><strong>Crush the biscuits:</strong><br>Place the biscuits in a bag and crush them with a rolling pin. Leave some larger pieces to give the chocolate balls a nice crunchy texture.</li><li><strong>Make the mixture:</strong><br>Add the sugar, cocoa powder, vanilla extract, and melted butter or margarine. Mix well, preferably by hand. If desired, add the melted dark chocolate and mix until combined.</li><li><strong>Add the milk:</strong> Gradually add the milk until the mixture becomes slightly sticky and holds together. Be careful not to add too much.</li><li><strong>Shape the balls:</strong> Take small portions of the mixture and roll them between your hands to form small balls.</li><li><strong>Coat:</strong><br>Roll each ball in coconut flakes, sprinkles, or crushed biscuits.</li><li><strong>Chill:</strong><br>Refrigerate for at least 1 hour before serving. Keep refrigerated.</li><li><strong>Yield:</strong> Approximately 25–30 chocolate balls, depending on size.</li></ol>
+  </div>
+</body>
+</html>
