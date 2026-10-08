@@ -1,6 +1,6 @@
 Arayes (Meat-Stuffed Pita)
 
-Position: bottom center
+Position: center center
 Zoom: 100%
 
 Description
