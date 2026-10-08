@@ -1,6 +1,6 @@
 עראייס
 
-Position: center center
+Position: bottom center
 Zoom: 100%
 
 תיאור
