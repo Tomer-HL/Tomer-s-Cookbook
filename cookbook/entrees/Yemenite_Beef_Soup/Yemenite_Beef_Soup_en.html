@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yemenite Beef Soup</title>
+<style>
+:root {
+    --orange: #d35400;
+    --section-bg: #fffaf0;
+    --border: #f7d8c5;
+}
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(180deg, #fdf8f0 0%, #fffefc 100%);
+    margin: 0;
+    padding: 40px 16px;
+    display: flex;
+    justify-content: center;
+}
+.page {
+    max-width: 900px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 28px 32px 32px;
+    position: relative;
+}
+.hero-wrapper {
+    position: relative;
+    width: 100%;
+    height: 260px; /* גובה קבוע (ברירת מחדל 260px) */
+    border-radius: 14px;
+    margin: 20px 0 24px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    overflow: hidden;           /* חותך את מה שגולש מה-scale */
+    background: #f5eee4;        /* fallback אם התמונה לא נטענה */
+}
+.hero {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;     /* מתיישב בדיוק — התמונה עובדה לאותו יחס */
+    background-repeat: no-repeat;
+    /* background-image, background-position, transform, transform-origin
+       מוזרקים inline מתוך Python לפי Position ו-Zoom */
+}
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.back-link {
+    font-size: 14px;
+    color: var(--orange);
+    text-decoration: none;
+    font-weight: 600;
+}
+.back-link:hover { text-decoration: underline; }
+.top-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.lang-switch {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: inherit;
+}
+.lang-switch img { width: 20px; height: 14px; }
+.print-button {
+    padding: 4px 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    background: var(--orange);
+    color: white;
+    cursor: pointer;
+}
+.print-button:hover { background: #e67e22; }
+.header-bar {
+    height: 3px;
+    background: var(--orange);
+    border-radius: 2px;
+    margin-bottom: 18px;
+}
+.tag {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    color: #7a7a7a;
+}
+h1 { margin: 6px 0; font-size: 32px; color: var(--orange); }
+.subtitle    { font-size: 15px; color: #666; margin-bottom: 6px; }
+.description { font-size: 15px; color: #444; }
+.meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    color: #23412f;
+}
+.meta-item .icon { font-size: 28px; }
+h2 { font-size: 20px; margin-bottom: 10px; color: var(--orange); }
+.section-box {
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+.divider {
+    height: 2px;
+    background: linear-gradient(to right, var(--orange) 10%, #fff 50%, var(--orange) 90%);
+    border: none;
+    margin: 20px 0;
+}
+
+ul {
+    list-style: none;
+    padding-left: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    left: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-left: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-left: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+/* תווית מובילה inline בתוך שורה (כמו "Tip:" ב-"Tip: Freeze portions...") */
+.inline-label {
+    color: var(--orange);
+    font-weight: 700;
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top-bar">
+    <a class="back-link" href="../../index_en.html">← Back to Index</a>
+    <div class="top-right">
+      <a class="lang-switch" href="Yemenite_Beef_Soup_he.html"><img src="../../flag_il.png" alt="עברית"> עברית</a>
+      <button class="print-button" onclick="window.print()">🖨️ Print</button>
+    </div>
+  </div>
+
+  <div class="hero-wrapper"><div class="hero" role="img" aria-label="Yemenite Beef Soup" style="background-image: url('Yemenite_Beef_Soup.jpg'); background-position: center center; transform: scale(1.0); transform-origin: center center;"></div></div>
+  <div class="header-bar"></div>
+
+  <div class="header">
+    <div class="tag">RECIPE</div>
+    <h1>Yemenite Beef Soup</h1>
+    <div class="subtitle">A classic dish you can easily make at home.</div>
+    <div class="description">Yemenite beef soup is traditionally served as the main course on holiday evenings and at social gatherings. The flavorful broth is seasoned with hawaij, a traditional Yemenite spice blend that can be found in many Jewish markets. Hawaij is also known for its high turmeric content, making this hearty soup both flavorful and nutritious.</div>
+    <div class="meta">
+      <div class="meta-item"><span class="icon">🕒</span> <b>Time:</b> 2.5 hours</div>
+      <div class="meta-item"><span class="icon">🍽️</span> <b>Servings:</b> 8</div>
+      <div class="meta-item"><span class="icon">🧑‍🍳</span> <b>Level:</b> Easy</div>
+    </div>
+  </div>
+
+  <div class="section-box">
+    <h2>Ingredients</h2>
+    <ul><li>2 tbsp olive oil</li><li>2–3 medium onions, peeled and diced</li><li>2 lbs beef stew meat with bones</li><li>1 tbsp paprika</li><li>½ tsp cumin</li><li>2 tbsp hawaij spice blend</li><li>8–10 cloves garlic</li><li>2–3 carrots, peeled and cut into 2-inch pieces</li><li>3–4 medium red or Yukon Gold potatoes, peeled and cut into quarters</li><li>2 celery stalks, cut into 2-inch pieces</li><li>1 bunch cilantro, cleaned, rinsed, and chopped as desired, plus more for garnish</li><li>3–4 whole allspice berries</li><li>2 bay leaves</li><li>Salt, to taste</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>Instructions</h2>
+    <ol><li>Place the beef pieces in an 8-quart stockpot.</li><li>Add about 12–14 cups of water to the pot, or enough to fill it about two-thirds of the way.</li><li>Bring the water to a boil and simmer for a few minutes, skimming off any foam that rises to the surface.</li><li>Add the hawaij, cumin, paprika, salt, onion, and garlic cloves to the pot and stir to combine.</li><li>Reduce the heat to medium and let the soup cook for 1½ hours, until the meat begins to soften.</li><li>Check the soup periodically to make sure it remains at a gentle simmer, with small bubbles rather than a rapid boil. Add more water if needed.</li><li>Add the potato chunks, carrots, celery, and cilantro.</li><li>Bring the soup back to a low simmer and continue cooking for another 30 minutes, or until the carrots and potatoes are tender.</li><li>Garnish with additional fresh cilantro before serving.</li></ol>
+  </div>
+</div>
+</body>
+</html>
