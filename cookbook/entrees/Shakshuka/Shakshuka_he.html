@@ -27,13 +27,25 @@ body {
     padding: 28px 32px 32px;
     position: relative;
 }
-.hero {
+.hero-wrapper {
+    position: relative;
     width: 100%;
-    height: 260px;
-    object-fit: cover;
+    height: 260px; /* גובה קבוע (ברירת מחדל 260px) */
     border-radius: 14px;
     margin: 20px 0 24px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    overflow: hidden;           /* חותך את מה שגולש מה-scale */
+    background: #f5eee4;        /* fallback אם התמונה לא נטענה */
+}
+.hero {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;     /* מתיישב בדיוק — התמונה עובדה לאותו יחס */
+    background-repeat: no-repeat;
+    /* background-image, background-position, transform, transform-origin
+       מוזרקים inline מתוך Python לפי Position ו-Zoom */
 }
 .top-bar {
     display: flex;
@@ -161,6 +173,30 @@ ol li::before {
     line-height: 28px;
     font-weight: bold;
 }
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-right: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+/* תווית מובילה inline בתוך שורה (כמו "Tip:" ב-"Tip: Freeze portions...") */
+.inline-label {
+    color: var(--orange);
+    font-weight: 700;
+}
 </style>
 </head>
 <body>
@@ -173,7 +209,7 @@ ol li::before {
     </div>
   </div>
 
-  <img class="hero" src="Shakshuka.png" alt="שקשוקה ישראלית">
+  <div class="hero-wrapper"><div class="hero" role="img" aria-label="שקשוקה ישראלית" style="background-image: url('Shakshuka.jpeg'); background-position: center center; transform: scale(1.0); transform-origin: center center;"></div></div>
   <div class="header-bar"></div>
 
   <div class="header">
@@ -182,7 +218,7 @@ ol li::before {
     <div class="subtitle">מנה קלאסית שקל להכין בבית.</div>
     <div class="description">שקשוקה היא אחת המנות האהובות והאיקוניות של המטבח הישראלי. היא הגיעה לישראל עם עולים יהודים מצפון אפריקה, ובבסיסה רוטב עגבניות מתובל שבתוכו מתבשלות ביצים. ברחבי המזרח התיכון וצפון אפריקה קיימות גרסאות אזוריות רבות למנה זו.</div>
     <div class="meta">
-      <div class="meta-item"><span class="icon">🕒</span> <b>זמן:</b> 45 דקות</div>
+      <div class="meta-item"><span class="icon">🕒</span> <b>זמן:</b> 30 דקות</div>
       <div class="meta-item"><span class="icon">🍽️</span> <b>מנות:</b> 4</div>
       <div class="meta-item"><span class="icon">🧑‍🍳</span> <b>רמת קושי:</b> קל</div>
     </div>

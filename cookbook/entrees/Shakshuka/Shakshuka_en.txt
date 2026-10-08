@@ -1,7 +1,12 @@
 Israeli Shakshuka
 
-Ingredients
+Position: center center
+Zoom: 80%
 
+Description
+Shakshuka is one of Israel’s most beloved dishes. Brought to Israel by Jewish immigrants from North Africa, it traditionally consists of spiced stewed tomatoes topped with gently poached eggs. Across the Middle East and North Africa, many regional variations of shakshuka exist.
+
+Ingredients
 2 tbsp olive oil
 
 1 onion, peeled and finely diced
@@ -25,7 +30,6 @@ Salt and freshly ground black pepper, to taste
 ½ tbsp fresh chopped parsley (for garnish, optional)
 
 Instructions
-
 Heat a sauté pan over medium heat and add the olive oil. Add the diced onion and sauté for 3–4 minutes until it begins to soften. Add the garlic and cook for about 30 seconds, until fragrant.
 
 Add the chopped bell pepper and hot pepper. Sauté for 5–7 minutes, until softened. Stir in the paprika.
@@ -41,7 +45,3 @@ Cover the pan and simmer for 5–7 minutes, until the egg whites are set and the
 For runnier yolks, check frequently to avoid overcooking.
 
 Garnish with chopped parsley, if desired, and serve immediately.
-
-Description
-
-Shakshuka is one of Israel’s most beloved dishes. Brought to Israel by Jewish immigrants from North Africa, it traditionally consists of spiced stewed tomatoes topped with gently poached eggs. Across the Middle East and North Africa, many regional variations of shakshuka exist.
