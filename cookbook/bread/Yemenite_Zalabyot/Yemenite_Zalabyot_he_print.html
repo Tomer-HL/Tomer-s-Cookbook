@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>זלביות – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-right: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-right: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    right: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-right: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-right: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-right: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+/* תווית מובילה inline בתוך שורה (כמו "Tip:" ב-"Tip: Freeze portions...") */
+.inline-label {
+    color: var(--orange);
+    font-weight: 700;
+}
+</style>
+</head>
+<body>
+  <h1>זלביות</h1>
+  <p>זלביה היא מאפה בצק מטוגן, המזכיר סופגנייה. בגרסתה המתוקה היא קינוח טעים ומפנק, אך באופן מסורתי נהוג להגיש זלביה דווקא כמנה מלוחה, לצד עגבניות טריות מרוסקות וביצים קשות.</p>
+  <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+  <div class="section-box">
+    <h2>מצרכים</h2>
+    <ul><li>7 כוסות קמח לבן (1 ק"ג)</li><li>2 כפות שמרים יבשים</li><li>1 כוס סוכר לבן</li><li>1 כף מלח</li><li>4–5 כוסות מים</li><li>שמן צמחי או שמן קנולה לטיגון</li><li><strong>להגשה</strong></li><li>ביצים קשות</li><li>כמות המתכון הינה ל25-30 זלביות.</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>הוראות הכנה</h2>
+    <ol><li>בקערה גדולה מערבבים את הקמח, השמרים, הסוכר, המלח והמים. הבצק צריך להיות רך מאוד ורטוב.</li><li>לשים את הבצק במשך כ-10 דקות, עד שכל המרכיבים מתאחדים היטב. מכסים ומניחים למנוחה של כ-10 דקות.</li><li>לאחר המנוחה הראשונה, לשים את הבצק שוב במשך כמה דקות נוספות. מכסים ומניחים להתפחה של כשעה. הבצק יהיה דביק מאוד, לכן מומלץ לשמן מעט את הידיים או להרטיב אותן במים בזמן העבודה.</li><li>מחממים שמן צמחי או שמן קנולה במחבת עמוקה על אש בינונית. גובה השמן צריך להגיע לכשני שלישים מגובה המחבת.</li><li>קורצים כדור בצק בגודל של אגרוף ומשטחים אותו בעדינות לעובי של כ-2.5 ס"מ. מניחים בזהירות בתוך השמן החם. השמן יבעבע סביב הבצק.</li><li>מטגנים עד להזהבה מצד אחד, הופכים בזהירות ומטגנים גם את הצד השני עד להזהבה. חשוב שהבצק לא יהיה עבה מדי ושהשמן לא יהיה חם מדי, אחרת פנים הבצק עלול להישאר בצקי ולא מבושל דיו.</li><li><strong>הצעת הגשה – גרסה מלוחה</strong><br>הזלביה טעימה במיוחד כשהיא מוגשת חמה, לצד עגבניות טריות מרוסקות המעורבבות עם כוסברה קצוצה דק, שום, מלח ופלפל לפי הטעם. למי שאוהב חריף, אפשר להוסיף סחוג תימני. באופן מסורתי, מגישים אותה גם לצד ביצים קשות פרוסות.</li><li><strong>הצעת הגשה – גרסה מתוקה</strong><br>כשהזלביה עדיין חמה, מצפים אותה בסוכר מכל הצדדים.</li></ol>
+  </div>
+</body>
+</html>
