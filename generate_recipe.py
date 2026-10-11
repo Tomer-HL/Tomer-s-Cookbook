@@ -94,7 +94,8 @@ SERVINGS      = 4
 # ============================================================
 
 VALID_CATEGORIES = {
-    "entrees":  {"en": "Entrees",         "he": "עיקריות"},
+    "entrees":  {"en": "Starters",        "he": "ראשונות"},   # folder name kept so links don't break
+    "mains":    {"en": "Main Courses",    "he": "עיקריות"},
     "sides":    {"en": "Sides",           "he": "תוספות"},
     "bread":    {"en": "Bread & Pastry",  "he": "לחמים ומאפים"},
     "desserts": {"en": "Desserts",        "he": "קינוחים"},

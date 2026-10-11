@@ -356,12 +356,12 @@ form.mode-he .lang-block-title { display: none; }
         </div>
         <div class="field">
           <label for="category">Category · קטגוריה</label>
-          <select id="category" name="category" required {% if is_edit %}disabled{% endif %}>
+          <select id="category" name="category" required>
             {% for value, label in categories.items() %}
               <option value="{{ value }}" {% if prefill and prefill.category == value %}selected{% endif %}>{{ label }}</option>
             {% endfor %}
           </select>
-          {% if is_edit %}<input type="hidden" name="category" value="{{ prefill.category }}">{% endif %}
+          {% if is_edit %}<input type="hidden" name="original_category" value="{{ prefill.category }}"><div class="hint">Change this to move the recipe to another category.</div>{% endif %}
         </div>
       </div>
     </div>

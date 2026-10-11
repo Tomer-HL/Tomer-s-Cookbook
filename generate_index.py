@@ -21,10 +21,11 @@ import re
 
 COOKBOOK_DIR = Path("cookbook")
 
-CATEGORIES_ORDER = ["entrees", "sides", "bread", "desserts"]
+CATEGORIES_ORDER = ["entrees", "mains", "sides", "bread", "desserts"]
 
 CATEGORY_META = {
-    "entrees":  {"en": "Entrees",        "he": "עיקריות",       "icon": "🍳"},
+    "entrees":  {"en": "Starters",       "he": "ראשונות",       "icon": "🥙"},
+    "mains":    {"en": "Main Courses",   "he": "עיקריות",       "icon": "🍲"},
     "sides":    {"en": "Sides",          "he": "תוספות",        "icon": "🥗"},
     "bread":    {"en": "Bread & Pastry", "he": "לחמים ומאפים",  "icon": "🍞"},
     "desserts": {"en": "Desserts",       "he": "קינוחים",       "icon": "🍮"},

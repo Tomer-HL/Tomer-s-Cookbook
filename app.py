@@ -71,7 +71,8 @@ META_FILENAME = "_meta.json"
 LEVELS_EN = ["Easy", "Medium", "Hard"]
 LEVELS_HE = ["קל", "בינוני", "מאתגר"]
 CATEGORY_LABELS = {
-    "entrees":  "Entrees / עיקריות",
+    "entrees":  "Starters / ראשונות",
+    "mains":    "Main Courses / עיקריות",
     "sides":    "Sides / תוספות",
     "bread":    "Bread & Pastry / לחמים ומאפים",
     "desserts": "Desserts / קינוחים",
@@ -328,7 +329,9 @@ def sync_to_github(targets: list[str], message: str) -> str:
     folder_prefixes: list[str] = []
     for rel in targets:
         path = PROJECT_ROOT / rel
-        if path.is_dir():
+        if rel.endswith("/") and not path.exists():
+            folder_prefixes.append(rel)          # folder was removed → delete on GitHub
+        elif path.is_dir():
             folder_prefixes.append(rel.rstrip("/") + "/")
             for f in path.rglob("*"):
                 if f.is_file() and "Zone.Identifier" not in f.name:
@@ -499,6 +502,19 @@ def create_view():
 
     out_dir = COOKBOOK_DIR / category / recipe_name
 
+    # Editing with a new category → move the recipe folder (photo included).
+    original_category = f.get("original_category", "")
+    moved_from = None
+    if (original_category and original_category != category
+            and original_category in generate_recipe.VALID_CATEGORIES):
+        old_dir = COOKBOOK_DIR / original_category / recipe_name
+        if old_dir.is_dir():
+            if out_dir.exists():
+                abort(400, description=f"A recipe named {recipe_name} already exists in {category}.")
+            out_dir.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(old_dir), str(out_dir))
+            moved_from = f"cookbook/{original_category}/{recipe_name}/"
+
     try:
         # A newly uploaded photo replaces the old one, even if its format differs
         # (e.g. new .jpg vs old .png). Otherwise the old file is found first and
@@ -578,7 +594,8 @@ def create_view():
     try:
         status = sync_to_github(
             [f"cookbook/{category}/{recipe_name}",
-             "cookbook/index_en.html", "cookbook/index_he.html"],
+             "cookbook/index_en.html", "cookbook/index_he.html"]
+            + ([moved_from] if moved_from else []),
             f"Update recipe: {recipe_name} - {timestamp}")
         session["sync_status"] = status
         session.pop("sync_error", None)
