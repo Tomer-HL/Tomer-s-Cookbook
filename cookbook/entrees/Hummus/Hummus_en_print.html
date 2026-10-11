@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Hummus – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-left: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    left: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-left: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-left: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+/* תווית מובילה inline בתוך שורה (כמו "Tip:" ב-"Tip: Freeze portions...") */
+.inline-label {
+    color: var(--orange);
+    font-weight: 700;
+}
+</style>
+</head>
+<body>
+  <h1>Hummus</h1>
+  <p>Hummus is a beloved Middle Eastern dip and spread, enjoyed around the world for its rich, creamy texture and delicious flavor. Made primarily from chickpeas, tahini, lemon juice, and garlic, hummus is versatile, nutritious, and easy to serve as a dip, spread, or part of a meal. It is also a good source of plant-based protein, fiber, and several essential nutrients.</p>
+  <button class="print-button" onclick="window.print()">🖨️ Print</button>
+  <div class="section-box">
+    <h2>Ingredients</h2>
+    <ul><li>1 (15 oz) can chickpeas, drained and rinsed</li><li>½ tsp baking soda</li><li>1–2 medium garlic cloves, crushed</li><li>1 cup tahini paste</li><li>½ tsp ground cumin</li><li>Juice of 1 lemon, to taste</li><li>1 tsp salt</li><li><strong>Optional Garnishes</strong></li><li>Olive oil</li><li>Za’atar</li><li>Sweet paprika</li><li>Cumin</li><li>Chopped parsley</li><li>Mushrooms</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>Instructions</h2>
+    <ol><li>Reserve 7–8 chickpeas for garnish.</li><li>Place the rinsed and drained chickpeas in a saucepan and cover with water. Add ½ tsp baking soda or baking powder.</li><li>Bring to a boil and cook for about 1–2 hours, until the chickpeas are soft enough to be easily crushed into a paste by hand.</li><li>Drain the chickpeas, reserving some of the cooking water.</li><li>Refrigerate both the chickpeas and the reserved cooking water until cooled.<br>With the food</li><li>processor running, drop in the garlic cloves and process until finely chopped.</li><li>Add the drained chickpeas and process for 2 minutes. Allow the mixture to cool.<br>Add the tahini (Har Bracha is recommended), cumin, lemon juice, and salt.</li><li>Process until completely combined. Alternatively, mix by hand for an even better result.<br>With the food processor running, slowly pour the reserved cold cooking water through the feed opening until the hummus reaches your desired creamy consistency. Be careful not to add too much water.</li><li>Spoon the hummus into a shallow serving bowl. Use the back of a spoon to create a groove across the surface, then generously drizzle with olive oil. Garnish with sweet paprika, cumin, za’atar, chopped parsley, and the reserved chickpeas.<br>For an extra topping, you can also add sautéed mushrooms and onions seasoned with 1 tsp cumin, a pinch of paprika, salt, pepper, and garlic powder.</li><li>Serve immediately with warm pita bread or fresh-cut vegetables. Enjoy!</li><li><strong>Storage:</strong> Store in an airtight container in the refrigerator for up to 3–4 days.</li></ol>
+  </div>
+</body>
+</html>

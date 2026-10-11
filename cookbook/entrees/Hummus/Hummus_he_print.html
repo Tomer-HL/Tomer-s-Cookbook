@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>חומוס – Print</title>
+<style>
+:root { --orange: #d35400; --section-bg: #fffaf0; --border: #f7d8c5; }
+body { font-family: Georgia, serif; padding: 40px; max-width: 800px;
+        margin: auto; line-height: 1.5; background: #fff; }
+h1  { font-size: 32px; margin-bottom: 10px; color: var(--orange); }
+h2  { margin-top: 28px; border-bottom: 2px solid var(--orange);
+       padding-bottom: 4px; color: var(--orange); }
+.section-box { background: var(--section-bg); border: 1px solid var(--border);
+                border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.divider { border-top: 1px dashed var(--orange); margin: 20px 0; }
+.print-button { display: inline-block; margin-bottom: 20px; padding: 8px 12px;
+                 font-size: 14px; border: none; border-radius: 6px;
+                 background: var(--orange); color: white; cursor: pointer; }
+.print-button:hover { background: #e67e22; }
+
+ul {
+    list-style: none;
+    padding-right: 28px;
+    margin: 0;
+}
+ul li {
+    position: relative;
+    padding-right: 28px;
+    margin-bottom: 6px;
+}
+ul li::before {
+    content: "❖";
+    color: var(--orange);
+    position: absolute;
+    right: 0;
+}
+ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-right: 0;
+    margin: 0;
+}
+ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 14px;
+    padding-right: 36px;
+    font-size: 15px;
+}
+ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+}
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-right: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+/* תווית מובילה inline בתוך שורה (כמו "Tip:" ב-"Tip: Freeze portions...") */
+.inline-label {
+    color: var(--orange);
+    font-weight: 700;
+}
+</style>
+</head>
+<body>
+  <h1>חומוס</h1>
+  <p>חומוס הוא ממרח אהוב ופופולרי במזרח התיכון, שנהנים ממנו ברחבי העולם בזכות המרקם הקרמי והטעם העשיר שלו. החומוס, המורכב בעיקר מגרגרי חומוס, טחינה, מיץ לימון ושום, הוא מאכל מגוון ומזין שאפשר להגיש כמטבל, כממרח או כחלק מארוחה. הוא גם מקור טוב לחלבון מהצומח, לסיבים תזונתיים ולרכיבי תזונה חיוניים נוספים.</p>
+  <button class="print-button" onclick="window.print()">🖨️ הדפסה</button>
+  <div class="section-box">
+    <h2>מצרכים</h2>
+    <ul><li>קופסת שימורים אחת של גרגרי חומוס (כ-425 גרם), מסוננים ושטופים</li><li>½ כפית סודה לשתייה</li><li>1–2 שיני שום בינוניות, כתושות</li><li>1 כוס טחינה גולמית</li><li>½ כפית כמון טחון</li><li>מיץ מלימון אחד, לפי הטעם</li><li>1 כפית מלח</li><li><strong>תוספות אופציונליות להגשה</strong></li><li>שמן זית</li><li>זעתר</li><li>פפריקה מתוקה</li><li>כמון</li><li>פטרוזיליה קצוצה</li><li>פטריות</li></ul>
+  </div>
+  <div class="divider"></div>
+  <div class="section-box">
+    <h2>הוראות הכנה</h2>
+    <ol><li>שומרים בצד 7–8 גרגרי חומוס לקישוט.</li><li>מניחים את גרגרי החומוס השטופים והמסוננים בסיר ומכסים במים. מוסיפים ½ כפית סודה לשתייה או אבקת אפייה.</li><li>מביאים לרתיחה ומבשלים במשך כשעה עד שעתיים, עד שהגרגרים רכים מספיק כדי שניתן יהיה למעוך אותם בקלות ביד למחית.</li><li>מסננים את גרגרי החומוס ושומרים מעט ממי הבישול. 5. מכניסים למקרר את גרגרי החומוס ואת מי הבישול ששמרנו, עד שיתקררו.</li><li>מפעילים את מעבד המזון ומכניסים לתוכו את שיני השום דרך פתח ההזנה. מעבדים עד שהשום קצוץ דק.</li><li>מוסיפים את גרגרי החומוס המסוננים ומעבדים במשך 2 דקות. מניחים לתערובת להתקרר.</li><li>מוסיפים את הטחינה הגולמית (מומלץ להשתמש בטחינה של הר ברכה), הכמון, מיץ הלימון והמלח. 9.במעבד מזון מעבדים עד לקבלת תערובת אחידה לחלוטין. אפשר גם לערבב ידנית לקבלת תוצאה טובה אף יותר.<br>כשהמעבד פועל, מוסיפים באיטיות דרך פתח ההזנה את מי הבישול הקרים ששמרנו, עד לקבלת המרקם הקרמי הרצוי. יש להיזהר שלא להוסיף יותר מדי מים.</li><li>מעבירים את החומוס לקערת הגשה שטוחה. בעזרת גב הכף יוצרים שקע לאורך פני החומוס, ומזלפים בנדיבות שמן זית. מקשטים בפפריקה מתוקה, כמון, זעתר, פטרוזיליה קצוצה וגרגרי החומוס ששמרנו בצד.<br>לתוספת מיוחדת, אפשר להוסיף גם פטריות ובצל מוקפצים, המתובלים בכפית כמון, קורט פפריקה, מלח, פלפל ואבקת שום.</li><li>מגישים מיד לצד פיתות חמות או ירקות טריים חתוכים. בתיאבון!</li><li><strong>אחסון:</strong> שומרים בכלי אטום במקרר למשך 3–4 ימים לכל היותר.</li></ol>
+  </div>
+</body>
+</html>
