@@ -61,6 +61,30 @@ ol li::before {
     line-height: 28px;
     font-weight: bold;
 }
+/* כותרת משנה בתוך פריט רשימת מצרכים — נראית כמו סעיף, לא כמו פריט */
+ul li.ing-heading {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 16px;
+}
+ul li.ing-heading:first-child { margin-top: 0; }
+ul li.ing-heading::before { content: none; }
+/* כותרת משנה בתחילת צעד (ב-ol) */
+ol li .step-heading {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+/* תווית מובילה inline בתוך שורה (כמו "Tip:" ב-"Tip: Freeze portions...") */
+.inline-label {
+    color: var(--orange);
+    font-weight: 700;
+}
 </style>
 </head>
 <body>
@@ -83,20 +107,7 @@ If you want, I can also adapt this recipe for oven baking or air-frying.</p>
   <div class="divider"></div>
   <div class="section-box">
     <h2>Instructions</h2>
-    <ol><li>Prepare the chicken
-Slice the chicken breasts into thin Schnitzel pieces and place them on a wide tray.
-Sprinkle with a bit of salt and let sit for 10 minutes.
-Afterward, pat the pieces dry with paper towels.</li><li>Set up your coating stations
-Plate 1: flour
-Plate 2: beaten eggs + salt + BBQ/paprika seasoning + mustard
-Bowl/tray: panko + sesame + finely crushed BBQ Bissli
-Tip: Use one hand for the dry ingredients (flour and breadcrumb mix) and the other hand for the wet ingredients (egg). This keeps your hands cleaner.</li><li>Coat the Schnitzels
-Dip each chicken piece in this order:
-Flour → Egg → Breadcrumbs/Bissli mixture
-When coating with breadcrumbs, press down with your palm to flatten the Schnitzel and help the coating stick.</li><li>Finish coating
-Coat all the chicken pieces before you begin frying.</li><li>Frying
-Heat half of the oil in a deep skillet over medium-high heat.
-Fry the Schnitzels until golden and crispy.</li></ol>
+    <ol><li>Prepare the chicken<br>Slice the chicken breasts into thin Schnitzel pieces and place them on a wide tray.<br>Sprinkle with a bit of salt and let sit for 10 minutes.<br>Afterward, pat the pieces dry with paper towels.</li><li>Set up your coating stations<br><strong class="inline-label">Plate 1:</strong> flour<br><strong class="inline-label">Plate 2:</strong> beaten eggs + salt + BBQ/paprika seasoning + mustard<br><strong class="inline-label">Bowl/tray:</strong> panko + sesame + finely crushed BBQ Bissli<br><strong class="inline-label">Tip:</strong> Use one hand for the dry ingredients (flour and breadcrumb mix) and the other hand for the wet ingredients (egg). This keeps your hands cleaner.</li><li>Coat the Schnitzels<br>Dip each chicken piece in this order:<br>Flour → Egg → Breadcrumbs/Bissli mixture<br>When coating with breadcrumbs, press down with your palm to flatten the Schnitzel and help the coating stick.</li><li>Finish coating<br>Coat all the chicken pieces before you begin frying.</li><li>Frying<br>Heat half of the oil in a deep skillet over medium-high heat.<br>Fry the Schnitzels until golden and crispy.</li></ol>
   </div>
 </body>
 </html>
